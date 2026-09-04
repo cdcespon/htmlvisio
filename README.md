@@ -9,6 +9,13 @@
 
 ---
 
+## 🎬 Video de Presentación Oficial
+Descarga y visualiza el video de presentación del producto en Full HD 1080p con locución en castellano neutro y música ambiental suave:
+
+- 🎥 **[Reproducir / Descargar Video de Presentación (`HtmlVisio_Presentacion.mp4`)](video/HtmlVisio_Presentacion.mp4)**
+
+---
+
 ## 📸 Capturas de Pantalla
 
 ### 1. Espacio de Trabajo Principal (Fluent Ribbon & Canvas SVG)
