@@ -1,0 +1,3443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft Visio - Diagrama1</title>
+  <style>
+    /* ==========================================================================
+       1. VARIABLES DEL SISTEMA Y DISEÑO FLUENT / OFFICE VISIO
+       ========================================================================== */
+    :root {
+      --visio-blue: #0f6cbd;
+      --visio-blue-dark: #0c5696;
+      --visio-blue-light: #ebf3fc;
+      --visio-blue-hover: #115ea3;
+      --ribbon-bg: #f5f5f5;
+      --ribbon-border: #e0e0e0;
+      --toolbar-btn-hover: #e5e5e5;
+      --toolbar-btn-active: #c7e0f4;
+      --surface-bg: #e9e9e9;
+      --panel-bg: #ffffff;
+      --text-main: #242424;
+      --text-secondary: #616161;
+      --text-muted: #8a8886;
+      --border-color: #d1d1d1;
+      --selection-color: #0078d4;
+      --handle-fill: #ffffff;
+      --handle-stroke: #0078d4;
+      --port-color: #0078d4;
+      --status-bg: #0f6cbd;
+      --status-text: #ffffff;
+      --ruler-bg: #f9f9f9;
+      --ruler-line: #bfbfbf;
+      --ruler-text: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      color: var(--text-main);
+      background: var(--surface-bg);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* ==========================================================================
+       2. BARRA DE TÍTULO SUPERIOR (TITLE BAR & QUICK ACCESS)
+       ========================================================================== */
+    .title-bar {
+      height: 36px;
+      background: var(--visio-blue);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+
+    .title-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .visio-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+    }
+
+    .visio-icon-badge {
+      width: 20px;
+      height: 20px;
+      background: #ffffff;
+      color: var(--visio-blue);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .quick-access {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      padding-left: 8px;
+    }
+
+    .qa-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      width: 26px;
+      height: 26px;
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.9;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .qa-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 1;
+    }
+
+    .qa-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .qa-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .title-center {
+      font-weight: 500;
+      font-size: 12px;
+      opacity: 0.95;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .doc-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+
+    .title-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .account-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+    }
+
+    .account-avatar {
+      width: 18px;
+      height: 18px;
+      background: #ffaa44;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 10px;
+    }
+
+    /* ==========================================================================
+       3. CINTA DE OPCIONES (RIBBON SYSTEM)
+       ========================================================================== */
+    .ribbon-container {
+      background: var(--ribbon-bg);
+      border-bottom: 1px solid var(--ribbon-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .ribbon-tabs {
+      display: flex;
+      padding-left: 8px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--ribbon-border);
+      height: 32px;
+    }
+
+    .ribbon-tab {
+      padding: 0 16px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.15s;
+    }
+
+    .ribbon-tab:hover {
+      background: #f0f0f0;
+      color: var(--visio-blue);
+    }
+
+    .ribbon-tab.active {
+      border-bottom-color: var(--visio-blue);
+      color: var(--visio-blue);
+      font-weight: 600;
+      background: var(--ribbon-bg);
+    }
+
+    .ribbon-tab.file-tab {
+      background: var(--visio-blue);
+      color: #ffffff;
+      font-weight: 600;
+      border-bottom: none;
+    }
+
+    .ribbon-tab.file-tab:hover {
+      background: var(--visio-blue-hover);
+      color: #ffffff;
+    }
+
+    .ribbon-content {
+      height: 84px;
+      display: none;
+      padding: 4px 10px;
+      gap: 4px;
+      align-items: stretch;
+      overflow-x: auto;
+    }
+
+    .ribbon-content.active {
+      display: flex;
+    }
+
+    .ribbon-group {
+      display: flex;
+      gap: 6px;
+      padding: 2px 8px 4px 8px;
+      border-right: 1px solid #d9d9d9;
+      position: relative;
+    }
+
+    .ribbon-group-title {
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+    }
+
+    .ribbon-group-items {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+
+    .btn-ribbon-large {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 4px 8px;
+      min-width: 50px;
+      height: 60px;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: background 0.15s, border-color 0.15s;
+      gap: 4px;
+    }
+
+    .btn-ribbon-large svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--visio-blue);
+    }
+
+    .btn-ribbon-large span {
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .btn-ribbon-large:hover {
+      background: var(--toolbar-btn-hover);
+      border-color: #d1d1d1;
+    }
+
+    .btn-ribbon-large.active {
+      background: var(--toolbar-btn-active);
+      border-color: var(--visio-blue);
+    }
+
+    .ribbon-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      justify-content: center;
+    }
+
+    .ribbon-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .btn-ribbon-small {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      padding: 3px 6px;
+      cursor: pointer;
+      color: var(--text-main);
+      height: 24px;
+      transition: background 0.12s;
+    }
+
+    .btn-ribbon-small svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .btn-ribbon-small:hover {
+      background: var(--toolbar-btn-hover);
+      border-color: #d1d1d1;
+    }
+
+    .btn-ribbon-small.active {
+      background: var(--toolbar-btn-active);
+      border-color: var(--visio-blue);
+    }
+
+    .ribbon-select {
+      height: 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      padding: 0 4px;
+      background: #ffffff;
+      outline: none;
+    }
+
+    .ribbon-select:focus {
+      border-color: var(--visio-blue);
+    }
+
+    .color-picker-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .color-picker-wrapper input[type="color"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .color-indicator-bar {
+      width: 16px;
+      height: 4px;
+      margin-top: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    /* ==========================================================================
+       4. CONTENEDOR PRINCIPAL Y PANELES (MAIN WORKSPACE)
+       ========================================================================== */
+    .workspace-main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Panel Izquierdo: Stencils */
+    .sidebar-stencils {
+      width: 250px;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 10;
+      transition: width 0.2s ease;
+    }
+
+    .sidebar-stencils.collapsed {
+      width: 38px;
+    }
+
+    .sidebar-header {
+      height: 36px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      background: #fafafa;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .sidebar-search {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border-color);
+      background: #fff;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      outline: none;
+    }
+
+    .sidebar-search input:focus {
+      border-color: var(--visio-blue);
+    }
+
+    .stencil-accordion {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .stencil-category {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stencil-cat-header {
+      padding: 8px 12px;
+      background: #f7f7f7;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .stencil-cat-header:hover {
+      background: #efefef;
+      color: var(--visio-blue);
+    }
+
+    .stencil-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      padding: 8px;
+      background: #ffffff;
+    }
+
+    .stencil-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: grab;
+      transition: all 0.15s;
+      background: #fcfcfc;
+    }
+
+    .stencil-item:hover {
+      background: var(--visio-blue-light);
+      border-color: #b5d7f7;
+      transform: translateY(-1px);
+    }
+
+    .stencil-item:active {
+      cursor: grabbing;
+    }
+
+    .stencil-item svg {
+      width: 36px;
+      height: 32px;
+      margin-bottom: 4px;
+    }
+
+    .stencil-item span {
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* ==========================================================================
+       5. LIENZO Y REGLAS (CANVAS & RULERS)
+       ========================================================================== */
+    .canvas-viewport-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      background: #e1e1e1;
+    }
+
+    /* Regla Horizontal */
+    .ruler-top {
+      height: 20px;
+      background: var(--ruler-bg);
+      border-bottom: 1px solid var(--ruler-line);
+      position: relative;
+      overflow: hidden;
+      margin-left: 20px;
+      flex-shrink: 0;
+    }
+
+    .ruler-corner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: #e9e9e9;
+      border-right: 1px solid var(--ruler-line);
+      border-bottom: 1px solid var(--ruler-line);
+      z-index: 5;
+    }
+
+    .canvas-middle-row {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Regla Vertical */
+    .ruler-left {
+      width: 20px;
+      background: var(--ruler-bg);
+      border-right: 1px solid var(--ruler-line);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .canvas-scroll-area {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .canvas-scroll-area.tool-pan {
+      cursor: grab;
+    }
+
+    .canvas-scroll-area.tool-pan:active {
+      cursor: grabbing;
+    }
+
+    .canvas-scroll-area.tool-connector {
+      cursor: crosshair;
+    }
+
+    #visio-svg-canvas {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Guías de alineación inteligentes */
+    .smart-guide {
+      stroke: #eb3b5a;
+      stroke-width: 1;
+      stroke-dasharray: 4, 3;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       6. ELEMENTOS SVG DEL DIAGRAMA, HANDLES Y CONECTORES
+       ========================================================================== */
+    .visio-shape {
+      cursor: move;
+      outline: none;
+    }
+
+    .visio-shape:hover .shape-geom {
+      filter: brightness(0.98);
+    }
+
+    /* Bounding Box de Selección */
+    .selection-box {
+      fill: none;
+      stroke: var(--selection-color);
+      stroke-width: 1.5;
+      stroke-dasharray: 4, 3;
+      pointer-events: none;
+    }
+
+    .transform-handle {
+      width: 8px;
+      height: 8px;
+      fill: var(--handle-fill);
+      stroke: var(--handle-stroke);
+      stroke-width: 1.5;
+      cursor: pointer;
+    }
+
+    .handle-nw { cursor: nwse-resize; }
+    .handle-n  { cursor: ns-resize; }
+    .handle-ne { cursor: nesw-resize; }
+    .handle-e  { cursor: ew-resize; }
+    .handle-se { cursor: nwse-resize; }
+    .handle-s  { cursor: ns-resize; }
+    .handle-sw { cursor: nesw-resize; }
+    .handle-w  { cursor: ew-resize; }
+
+    .rotate-handle-line {
+      stroke: var(--selection-color);
+      stroke-width: 1;
+      stroke-dasharray: 2, 2;
+    }
+
+    .rotate-handle {
+      fill: #107c41;
+      stroke: #ffffff;
+      stroke-width: 1.5;
+      cursor: grab;
+    }
+
+    /* Puertos de Conexión Magnéticos */
+    .connection-port {
+      fill: #ffffff;
+      stroke: var(--port-color);
+      stroke-width: 1.5;
+      opacity: 0;
+      transition: opacity 0.15s, transform 0.15s;
+      cursor: crosshair;
+    }
+
+    .visio-shape:hover .connection-port,
+    .connection-port.active,
+    .tool-connector-active .connection-port {
+      opacity: 0.9;
+    }
+
+    .connection-port:hover {
+      opacity: 1;
+      transform: scale(1.4);
+      fill: var(--visio-blue);
+      stroke: #ffffff;
+    }
+
+    /* Conectores */
+    .visio-connector-path {
+      fill: none;
+      stroke: #242424;
+      stroke-width: 2;
+      cursor: pointer;
+    }
+
+    .visio-connector-path.selected {
+      stroke: var(--selection-color);
+      stroke-width: 2.5;
+    }
+
+    .visio-connector-hitbox {
+      fill: none;
+      stroke: transparent;
+      stroke-width: 14;
+      cursor: pointer;
+    }
+
+    .connector-temp-line {
+      fill: none;
+      stroke: var(--selection-color);
+      stroke-width: 2;
+      stroke-dasharray: 4, 4;
+      pointer-events: none;
+    }
+
+    /* Recuadro de Selección Múltiple (Rubber-band) */
+    .rubber-band {
+      fill: rgba(0, 120, 212, 0.1);
+      stroke: var(--selection-color);
+      stroke-width: 1;
+      stroke-dasharray: 3, 3;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       7. PANEL DERECHO DE FORMATO Y PROPIEDADES (INSPECTOR)
+       ========================================================================== */
+    .sidebar-properties {
+      width: 260px;
+      background: var(--panel-bg);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      z-index: 10;
+      transition: width 0.2s ease;
+    }
+
+    .sidebar-properties.collapsed {
+      width: 0;
+      border-left: none;
+      overflow: hidden;
+    }
+
+    .prop-section {
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 14px;
+    }
+
+    .prop-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .prop-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .prop-label {
+      color: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    .prop-input-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prop-input {
+      width: 70px;
+      height: 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      padding: 0 6px;
+      text-align: right;
+    }
+
+    .prop-input:focus {
+      border-color: var(--visio-blue);
+      outline: none;
+    }
+
+    .color-swatch-btn {
+      width: 26px;
+      height: 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      position: relative;
+    }
+
+    .color-swatch-preview {
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+
+    /* ==========================================================================
+       8. BARRA DE ESTADO INFERIOR (STATUS BAR)
+       ========================================================================== */
+    .status-bar {
+      height: 26px;
+      background: var(--status-bg);
+      color: var(--status-text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 11px;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .zoom-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .zoom-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      width: 18px;
+      height: 18px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .zoom-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .zoom-slider {
+      -webkit-appearance: none;
+      width: 90px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .zoom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .zoom-level {
+      width: 40px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+    }
+
+    /* Editor de Texto Flotante In-situ */
+    #inline-text-editor {
+      position: absolute;
+      display: none;
+      border: 1px solid var(--visio-blue);
+      outline: none;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-family: inherit;
+      text-align: center;
+      resize: none;
+      overflow: hidden;
+      padding: 4px;
+      z-index: 1000;
+      border-radius: 2px;
+    }
+
+    /* Modal de Diálogo General */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      width: 440px;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 12px 16px;
+      background: var(--visio-blue);
+      color: #ffffff;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-body {
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .modal-footer {
+      padding: 10px 16px;
+      background: #f7f7f7;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--visio-blue);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: var(--visio-blue-hover);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: #f0f0f0;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 38px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #242424;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 3000;
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       BARRA DE TÍTULO SUPERIOR (MICROSOFT VISIO STYLE)
+       ========================================================================== -->
+  <header class="title-bar">
+    <div class="title-left">
+      <div class="visio-logo">
+        <div class="visio-icon-badge">V</div>
+        <span>Visio</span>
+      </div>
+      <div class="quick-access">
+        <button class="qa-btn" id="qa-save" title="Guardar Proyecto (Ctrl+S)">
+          <svg viewBox="0 0 16 16"><path d="M14 4.5V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h7.5L14 4.5zM4 2v3h6V2H4zm8 12V8H4v6h8z"/></svg>
+        </button>
+        <button class="qa-btn" id="qa-undo" title="Deshacer (Ctrl+Z)" disabled>
+          <svg viewBox="0 0 16 16"><path d="M4.5 7h6a3.5 3.5 0 0 1 3.5 3.5v1a.5.5 0 0 1-1 0v-1a2.5 2.5 0 0 0-2.5-2.5h-6l2.15 2.15a.5.5 0 1 1-.71.7L2.15 7.5a.5.5 0 0 1 0-.71l3.29-3.3a.5.5 0 1 1 .7.71L4.5 7z"/></svg>
+        </button>
+        <button class="qa-btn" id="qa-redo" title="Rehacer (Ctrl+Y)" disabled>
+          <svg viewBox="0 0 16 16"><path d="M11.5 7h-6A3.5 3.5 0 0 0 2 10.5v1a.5.5 0 0 0 1 0v-1A2.5 2.5 0 0 1 5.5 8h6l-2.15 2.15a.5.5 0 1 0 .71.7l3.29-3.35a.5.5 0 0 0 0-.71l-3.3-3.3a.5.5 0 1 0-.7.71L11.5 7z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="title-center">
+      <span id="diagram-title-label">Diagrama1</span>
+      <span class="doc-badge">Visio Diagram</span>
+    </div>
+    <div class="title-right">
+      <div class="account-badge">
+        <div class="account-avatar">U</div>
+        <span>Usuario</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       CINTA DE OPCIONES (RIBBON SYSTEM)
+       ========================================================================== -->
+  <div class="ribbon-container">
+    <nav class="ribbon-tabs">
+      <div class="ribbon-tab file-tab" id="tab-file">Archivo</div>
+      <div class="ribbon-tab active" data-tab="tab-home">Inicio</div>
+      <div class="ribbon-tab" data-tab="tab-insert">Insertar</div>
+      <div class="ribbon-tab" data-tab="tab-design">Diseño</div>
+      <div class="ribbon-tab" data-tab="tab-view">Vista</div>
+      <div class="ribbon-tab" data-tab="tab-help">Ayuda</div>
+    </nav>
+
+    <!-- Pestaña INICIO -->
+    <div class="ribbon-content active" id="content-tab-home">
+      <!-- Portapapeles -->
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-paste" title="Pegar (Ctrl+V)">
+          <svg viewBox="0 0 16 16"><path d="M5 2V1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h2zm1 0h4V1H6v1zm6 2H4v11h8V4z"/></svg>
+          <span>Pegar</span>
+        </button>
+        <div class="ribbon-col">
+          <button class="btn-ribbon-small" id="btn-cut" title="Cortar (Ctrl+X)">
+            <svg viewBox="0 0 16 16"><path d="M3.5 3.5a2 2 0 1 0 2.83 2.83L8 4.71l1.67 1.62a2 2 0 1 0 2.83-2.83 2 2 0 0 0-2.83 0L8 5.17 6.33 3.5a2 2 0 0 0-2.83 0zm4.5 4.5l-5 7 1.41 1.41L8 11.5l3.59 4.91 1.41-1.41-5-7z"/></svg>
+            <span>Cortar</span>
+          </button>
+          <button class="btn-ribbon-small" id="btn-copy" title="Copiar (Ctrl+C)">
+            <svg viewBox="0 0 16 16"><path d="M4 2h7a1 1 0 0 1 1 1v1H4v9H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1zm2 3h7a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 1v8h6V6H7z"/></svg>
+            <span>Copiar</span>
+          </button>
+        </div>
+        <div class="ribbon-group-title">Portapapeles</div>
+      </div>
+
+      <!-- Herramientas Principales -->
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large active" id="tool-pointer" data-tool="pointer" title="Herramienta Puntero (V / Esc)">
+          <svg viewBox="0 0 16 16"><path d="M3 1l10 7-5.5 1-2.5 6L3 1z"/></svg>
+          <span>Puntero</span>
+        </button>
+        <button class="btn-ribbon-large" id="tool-connector" data-tool="connector" title="Herramienta Conector (C)">
+          <svg viewBox="0 0 16 16"><path d="M2 3h4v4H4v2h8V7h-2V3h4v4h-1v4h-4v2h2v4H7v-4h2v-2H3V7H2V3z"/></svg>
+          <span>Conector</span>
+        </button>
+        <button class="btn-ribbon-large" id="tool-pan" data-tool="pan" title="Herramienta Mano / Paneo (H / Espacio)">
+          <svg viewBox="0 0 16 16"><path d="M6 1a1 1 0 0 1 1 1v4h1V2a1 1 0 0 1 2 0v4h1V3a1 1 0 0 1 2 0v5a5 5 0 0 1-5 5H6a5 5 0 0 1-5-5V6a1 1 0 0 1 2 0v2h1V1a1 1 0 0 1 2 0z"/></svg>
+          <span>Mano</span>
+        </button>
+        <button class="btn-ribbon-large" id="tool-text" data-tool="text" title="Herramienta Texto (T)">
+          <svg viewBox="0 0 16 16"><path d="M3 2h10v2H9v10H7V4H3V2z"/></svg>
+          <span>Texto</span>
+        </button>
+        <div class="ribbon-group-title">Herramientas</div>
+      </div>
+
+      <!-- Fuente y Tipografía -->
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <div class="ribbon-row">
+            <select class="ribbon-select" id="font-family" style="width: 110px;">
+              <option value="Segoe UI">Segoe UI</option>
+              <option value="Arial">Arial</option>
+              <option value="Calibri">Calibri</option>
+              <option value="Consolas">Consolas</option>
+              <option value="Times New Roman">Times New Roman</option>
+            </select>
+            <select class="ribbon-select" id="font-size" style="width: 50px;">
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12" selected>12</option>
+              <option value="14">14</option>
+              <option value="16">16</option>
+              <option value="18">18</option>
+              <option value="24">24</option>
+              <option value="32">32</option>
+            </select>
+          </div>
+          <div class="ribbon-row">
+            <button class="btn-ribbon-small" id="btn-bold" title="Negrita (Ctrl+B)"><strong>N</strong></button>
+            <button class="btn-ribbon-small" id="btn-italic" title="Cursiva (Ctrl+I)"><em>K</em></button>
+            <button class="btn-ribbon-small" id="btn-underline" title="Subrayado (Ctrl+U)"><u>S</u></button>
+            <button class="btn-ribbon-small color-picker-wrapper" title="Color de Fuente">
+              <span style="font-weight:bold; font-size:13px;">A</span>
+              <input type="color" id="font-color-picker" value="#242424">
+              <div class="color-indicator-bar" id="font-color-bar" style="background:#242424;"></div>
+            </button>
+          </div>
+        </div>
+        <div class="ribbon-group-title">Fuente</div>
+      </div>
+
+      <!-- Estilos de Forma (Relleno y Contorno Visio) -->
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <div class="ribbon-row">
+            <button class="btn-ribbon-small color-picker-wrapper" id="btn-shape-fill" title="Relleno de Forma">
+              <svg viewBox="0 0 16 16"><path d="M2 12l5-9 5 9H2zm2.5-1.5h5L7 7l-2.5 3.5z"/></svg>
+              <span>Relleno</span>
+              <input type="color" id="shape-fill-picker" value="#ffffff">
+              <div class="color-indicator-bar" id="fill-indicator-bar" style="background:#ffffff; position:absolute; bottom:2px; left:8px; width:18px;"></div>
+            </button>
+            <button class="btn-ribbon-small color-picker-wrapper" id="btn-shape-stroke" title="Contorno de Línea">
+              <svg viewBox="0 0 16 16"><path d="M1 14h14v1H1v-1zm1-4h12v1H2v-1zm2-4h8v1H4V6zm2-4h4v1H6V2z"/></svg>
+              <span>Línea</span>
+              <input type="color" id="shape-stroke-picker" value="#0f6cbd">
+              <div class="color-indicator-bar" id="stroke-indicator-bar" style="background:#0f6cbd; position:absolute; bottom:2px; left:8px; width:18px;"></div>
+            </button>
+          </div>
+          <div class="ribbon-row">
+            <select class="ribbon-select" id="stroke-width-select" title="Grosor de Línea" style="width: 80px;">
+              <option value="1">1 pto</option>
+              <option value="2" selected>2 pto</option>
+              <option value="3">3 pto</option>
+              <option value="4">4 pto</option>
+              <option value="6">6 pto</option>
+            </select>
+            <select class="ribbon-select" id="stroke-dash-select" title="Tipo de Trazo" style="width: 85px;">
+              <option value="solid">Sólido</option>
+              <option value="dashed">Guiones</option>
+              <option value="dotted">Puntos</option>
+            </select>
+          </div>
+        </div>
+        <div class="ribbon-group-title">Forma</div>
+      </div>
+
+      <!-- Conector Estilo / Enrutamiento -->
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <div class="ribbon-row">
+            <select class="ribbon-select" id="connector-routing-type" title="Tipo de Conector" style="width: 110px;">
+              <option value="orthogonal" selected>Ortogonal (90°)</option>
+              <option value="straight">Recto</option>
+              <option value="curved">Curva Bézier</option>
+            </select>
+          </div>
+          <div class="ribbon-row">
+            <select class="ribbon-select" id="connector-arrow-type" title="Puntas de Flecha" style="width: 110px;">
+              <option value="end-arrow" selected>Flecha final</option>
+              <option value="both-arrow">Ambos extremos</option>
+              <option value="none">Sin flechas</option>
+            </select>
+          </div>
+        </div>
+        <div class="ribbon-group-title">Conectores</div>
+      </div>
+
+      <!-- Disposición / Organizar -->
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <div class="ribbon-row">
+            <button class="btn-ribbon-small" id="btn-bring-front" title="Traer al Frente">
+              <span>Traer al Frente</span>
+            </button>
+            <button class="btn-ribbon-small" id="btn-send-back" title="Enviar al Fondo">
+              <span>Enviar al Fondo</span>
+            </button>
+          </div>
+          <div class="ribbon-row">
+            <button class="btn-ribbon-small" id="btn-duplicate" title="Duplicar (Ctrl+D)">
+              <span>Duplicar</span>
+            </button>
+            <button class="btn-ribbon-small" id="btn-delete" title="Eliminar (Supr)" style="color:#d13438;">
+              <span>Eliminar</span>
+            </button>
+          </div>
+        </div>
+        <div class="ribbon-group-title">Organizar</div>
+      </div>
+    </div>
+
+    <!-- Pestaña INSERTAR -->
+    <div class="ribbon-content" id="content-tab-insert">
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-insert-process">
+          <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="8" rx="1" fill="none" stroke="#0f6cbd" stroke-width="2"/></svg>
+          <span>Proceso</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-insert-decision">
+          <svg viewBox="0 0 16 16"><polygon points="8,2 14,8 8,14 2,8" fill="none" stroke="#0f6cbd" stroke-width="2"/></svg>
+          <span>Decisión</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-insert-start">
+          <svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="8" rx="4" fill="none" stroke="#0f6cbd" stroke-width="2"/></svg>
+          <span>Inicio/Fin</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-insert-database">
+          <svg viewBox="0 0 16 16"><ellipse cx="8" cy="4" rx="5" ry="2" fill="none" stroke="#0f6cbd" stroke-width="1.5"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4" fill="none" stroke="#0f6cbd" stroke-width="1.5"/></svg>
+          <span>Datos</span>
+        </button>
+        <div class="ribbon-group-title">Formas Rápidas</div>
+      </div>
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-insert-note">
+          <svg viewBox="0 0 16 16"><path d="M3 2h7l4 4v8H3V2z" fill="#fff4ce" stroke="#f2c811" stroke-width="1.5"/></svg>
+          <span>Nota</span>
+        </button>
+        <div class="ribbon-group-title">Anotaciones</div>
+      </div>
+    </div>
+
+    <!-- Pestaña DISEÑO -->
+    <div class="ribbon-content" id="content-tab-design">
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-theme-classic">
+          <div style="width:24px; height:24px; background:#0f6cbd; border-radius:3px;"></div>
+          <span>Azul Visio</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-theme-teal">
+          <div style="width:24px; height:24px; background:#008272; border-radius:3px;"></div>
+          <span>Verde Azulado</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-theme-purple">
+          <div style="width:24px; height:24px; background:#742774; border-radius:3px;"></div>
+          <span>Púrpura</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-theme-orange">
+          <div style="width:24px; height:24px; background:#d83b01; border-radius:3px;"></div>
+          <span>Naranja</span>
+        </button>
+        <div class="ribbon-group-title">Temas de Diagrama</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="chk-grid" checked>
+            <span>Mostrar Cuadrícula</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="chk-snap" checked>
+            <span>Ajustar a Cuadrícula (Snap)</span>
+          </label>
+        </div>
+        <div class="ribbon-group-title">Ayudas de Diseño</div>
+      </div>
+    </div>
+
+    <!-- Pestaña VISTA -->
+    <div class="ribbon-content" id="content-tab-view">
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-zoom-fit">
+          <svg viewBox="0 0 16 16"><path d="M1 1h5v2H3v3H1V1zm9 0h5v5h-2V3h-3V1zM1 10h2v3h3v2H1v-5zm12 3h-3v2h5v-5h-2v3z"/></svg>
+          <span>Ajustar Todo</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-zoom-100">
+          <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" fill="none" stroke="#0f6cbd" stroke-width="2"/><line x1="11" y1="11" x2="15" y2="15" stroke="#0f6cbd" stroke-width="2"/></svg>
+          <span>100 %</span>
+        </button>
+        <div class="ribbon-group-title">Zoom</div>
+      </div>
+      <div class="ribbon-group">
+        <div class="ribbon-col">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="chk-rulers" checked>
+            <span>Reglas Métricas</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="chk-guides" checked>
+            <span>Guías Dinámicas</span>
+          </label>
+        </div>
+        <div class="ribbon-group-title">Mostrar / Ocultar</div>
+      </div>
+    </div>
+
+    <!-- Pestaña AYUDA -->
+    <div class="ribbon-content" id="content-tab-help">
+      <div class="ribbon-group">
+        <button class="btn-ribbon-large" id="btn-shortcuts-dialog">
+          <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#0f6cbd" stroke-width="1.5"/><text x="8" y="11" text-anchor="middle" font-size="9" font-weight="bold" fill="#0f6cbd">?</text></svg>
+          <span>Atajos</span>
+        </button>
+        <button class="btn-ribbon-large" id="btn-about-visio">
+          <svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="2" fill="#0f6cbd"/><text x="8" y="11" text-anchor="middle" font-size="9" font-weight="bold" fill="#ffffff">i</text></svg>
+          <span>Acerca de</span>
+        </button>
+        <div class="ribbon-group-title">Ayuda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       ESPACIO DE TRABAJO (PANEL IZQUIERDO, LIENZO Y PANEL DERECHO)
+       ========================================================================== -->
+  <main class="workspace-main">
+
+    <!-- PANEL LATERAL IZQUIERDO: STENCILS / PALETA DE FORMAS -->
+    <aside class="sidebar-stencils" id="sidebar-stencils">
+      <div class="sidebar-header">
+        <span>Formas de Visio</span>
+        <button id="btn-collapse-stencils" style="background:none; border:none; cursor:pointer; color:var(--text-secondary);" title="Colapsar panel">◀</button>
+      </div>
+      <div class="sidebar-search">
+        <input type="text" id="stencil-search-input" placeholder="Buscar formas...">
+      </div>
+      <div class="stencil-accordion">
+        
+        <!-- Categoría: Diagrama de Flujo Básico -->
+        <div class="stencil-category">
+          <div class="stencil-cat-header">
+            <span>Diagrama de Flujo Básico</span>
+            <span>▾</span>
+          </div>
+          <div class="stencil-grid">
+            <div class="stencil-item" draggable="true" data-shape="process">
+              <svg viewBox="0 0 60 40">
+                <rect x="5" y="5" width="50" height="30" rx="3" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="24" text-anchor="middle" font-size="9" fill="#242424">Proceso</text>
+              </svg>
+              <span>Proceso</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="decision">
+              <svg viewBox="0 0 60 40">
+                <polygon points="30,4 56,20 30,36 4,20" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Decisión</text>
+              </svg>
+              <span>Decisión</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="terminal">
+              <svg viewBox="0 0 60 40">
+                <rect x="5" y="8" width="50" height="24" rx="12" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Inicio/Fin</text>
+              </svg>
+              <span>Inicio / Fin</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="document">
+              <svg viewBox="0 0 60 40">
+                <path d="M 5,5 L 55,5 L 55,30 Q 42,22 30,30 Q 18,38 5,30 Z" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="20" text-anchor="middle" font-size="8" fill="#242424">Documento</text>
+              </svg>
+              <span>Documento</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="data">
+              <svg viewBox="0 0 60 40">
+                <polygon points="12,6 56,6 48,34 4,34" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Datos (E/S)</text>
+              </svg>
+              <span>Datos E/S</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="database">
+              <svg viewBox="0 0 60 40">
+                <ellipse cx="30" cy="10" rx="22" ry="6" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
+                <path d="M 8,10 L 8,30 C 8,34 52,34 52,30 L 52,10" fill="none" stroke="#0f6cbd" stroke-width="1.8"/>
+                <ellipse cx="30" cy="30" rx="22" ry="6" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
+                <text x="30" y="24" text-anchor="middle" font-size="8" fill="#242424">Base de Datos</text>
+              </svg>
+              <span>Base Datos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría: Formas Generales y Bloques -->
+        <div class="stencil-category">
+          <div class="stencil-cat-header">
+            <span>Formas Generales</span>
+            <span>▾</span>
+          </div>
+          <div class="stencil-grid">
+            <div class="stencil-item" draggable="true" data-shape="circle">
+              <svg viewBox="0 0 60 40">
+                <circle cx="30" cy="20" r="16" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
+                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Círculo</text>
+              </svg>
+              <span>Círculo</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="cloud">
+              <svg viewBox="0 0 60 40">
+                <path d="M 18,30 C 10,30 8,20 16,18 C 14,10 26,8 30,12 C 36,6 48,10 46,18 C 54,20 52,30 44,30 Z" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
+                <text x="30" y="24" text-anchor="middle" font-size="8" fill="#242424">Nube</text>
+              </svg>
+              <span>Nube</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="actor">
+              <svg viewBox="0 0 60 40">
+                <circle cx="30" cy="10" r="5" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
+                <line x1="30" y1="15" x2="30" y2="28" stroke="#0f6cbd" stroke-width="1.8"/>
+                <line x1="18" y1="20" x2="42" y2="20" stroke="#0f6cbd" stroke-width="1.8"/>
+                <line x1="30" y1="28" x2="20" y2="38" stroke="#0f6cbd" stroke-width="1.8"/>
+                <line x1="30" y1="28" x2="40" y2="38" stroke="#0f6cbd" stroke-width="1.8"/>
+              </svg>
+              <span>Actor</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="note">
+              <svg viewBox="0 0 60 40">
+                <path d="M 12,6 L 40,6 L 48,14 L 48,34 L 12,34 Z" fill="#fff8d6" stroke="#c9a834" stroke-width="1.8"/>
+                <polyline points="40,6 40,14 48,14" fill="none" stroke="#c9a834" stroke-width="1.8"/>
+                <text x="30" y="26" text-anchor="middle" font-size="8" fill="#444">Nota</text>
+              </svg>
+              <span>Nota</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ÁREA CENTRAL: REGLAS Y VIEWPORT DEL LIENZO -->
+    <div class="canvas-viewport-wrapper">
+      <div class="ruler-corner"></div>
+      <div class="ruler-top" id="ruler-top">
+        <canvas id="ruler-top-canvas" height="20"></canvas>
+      </div>
+
+      <div class="canvas-middle-row">
+        <div class="ruler-left" id="ruler-left">
+          <canvas id="ruler-left-canvas" width="20"></canvas>
+        </div>
+
+        <div class="canvas-scroll-area" id="canvas-scroll-area">
+          <svg id="visio-svg-canvas">
+            <defs>
+              <!-- Marcador de Flecha Final Estándar Visio -->
+              <marker id="marker-arrow-end" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <polygon points="0 1, 8 4, 0 7" fill="#0f6cbd" class="marker-poly"/>
+              </marker>
+              <!-- Marcador de Flecha Inicial -->
+              <marker id="marker-arrow-start" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
+                <polygon points="8 1, 0 4, 8 7" fill="#0f6cbd" class="marker-poly"/>
+              </marker>
+
+              <!-- Patrón de Cuadrícula Milimétrica Estilo Visio -->
+              <pattern id="grid-pattern-small" width="15" height="15" patternUnits="userSpaceOnUse">
+                <path d="M 15 0 L 0 0 0 15" fill="none" stroke="#ececec" stroke-width="0.8"/>
+              </pattern>
+              <pattern id="grid-pattern-large" width="75" height="75" patternUnits="userSpaceOnUse">
+                <rect width="75" height="75" fill="url(#grid-pattern-small)"/>
+                <path d="M 75 0 L 0 0 0 75" fill="none" stroke="#d5d5d5" stroke-width="1.2"/>
+              </pattern>
+
+              <!-- Sombra sutil de página de Visio -->
+              <filter id="page-drop-shadow" x="-5%" y="-5%" width="115%" height="115%">
+                <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.18"/>
+              </filter>
+            </defs>
+
+            <!-- Capa Transformable General (Paneo y Zoom) -->
+            <g id="viewport-transform-group">
+              
+              <!-- Hoja de Papel Principal (Página de Visio) -->
+              <g id="page-background-group">
+                <rect id="visio-page-sheet" x="0" y="0" width="1600" height="1100" fill="#ffffff" filter="url(#page-drop-shadow)"/>
+                <!-- Cuadrícula -->
+                <rect id="visio-page-grid" x="0" y="0" width="1600" height="1100" fill="url(#grid-pattern-large)"/>
+              </g>
+
+              <!-- Capa 1: Conectores (Líneas de flujo debajo de formas) -->
+              <g id="layer-connectors"></g>
+
+              <!-- Capa 2: Formas Vectoriales (Nodos) -->
+              <g id="layer-shapes"></g>
+
+              <!-- Capa 3: Superposiciones (Bounding Box, Handles, Puertos) -->
+              <g id="layer-overlay">
+                <rect id="selection-bounding-box" class="selection-box" style="display:none;"/>
+                <g id="transform-handles-group" style="display:none;"></g>
+                <line id="rotate-handle-line" class="rotate-handle-line" style="display:none;"/>
+                <circle id="rotate-handle" class="rotate-handle" r="5" style="display:none;"/>
+                <g id="smart-guides-group"></g>
+                <path id="temp-connector-line" class="connector-temp-line" style="display:none;"/>
+                <rect id="rubber-band-box" class="rubber-band" style="display:none;"/>
+              </g>
+
+            </g>
+          </svg>
+
+          <!-- Input Flotante para Edición en caliente de Texto -->
+          <textarea id="inline-text-editor"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL LATERAL DERECHO: INSPECTOR DE PROPIEDADES -->
+    <aside class="sidebar-properties" id="sidebar-properties">
+      <div class="sidebar-header">
+        <span>Formato de Forma</span>
+        <button id="btn-collapse-properties" style="background:none; border:none; cursor:pointer; color:var(--text-secondary);" title="Cerrar panel">✕</button>
+      </div>
+
+      <div style="flex:1; overflow-y:auto;">
+        <!-- Sección Geometría -->
+        <div class="prop-section">
+          <div class="prop-section-title">Posición y Tamaño</div>
+          <div class="prop-row">
+            <span class="prop-label">X:</span>
+            <input type="number" class="prop-input" id="prop-x" value="0">
+            <span class="prop-label">Y:</span>
+            <input type="number" class="prop-input" id="prop-y" value="0">
+          </div>
+          <div class="prop-row">
+            <span class="prop-label">Ancho:</span>
+            <input type="number" class="prop-input" id="prop-w" value="120">
+            <span class="prop-label">Alto:</span>
+            <input type="number" class="prop-input" id="prop-h" value="70">
+          </div>
+          <div class="prop-row">
+            <span class="prop-label">Ángulo:</span>
+            <input type="number" class="prop-input" id="prop-angle" value="0">
+            <span style="font-size:10px; color:#888;">grados</span>
+          </div>
+        </div>
+
+        <!-- Sección Relleno -->
+        <div class="prop-section">
+          <div class="prop-section-title">Relleno</div>
+          <div class="prop-row">
+            <span class="prop-label">Color de Relleno:</span>
+            <div class="color-swatch-btn">
+              <div class="color-swatch-preview" id="prop-fill-preview" style="background:#ffffff;"></div>
+              <input type="color" id="prop-fill-color" value="#ffffff" style="position:absolute; opacity:0; width:100%; height:100%; cursor:pointer;">
+            </div>
+          </div>
+          <div class="prop-row">
+            <span class="prop-label">Opacidad:</span>
+            <input type="range" id="prop-opacity" min="0.1" max="1" step="0.05" value="1" style="width:100px;">
+          </div>
+        </div>
+
+        <!-- Sección Línea / Trazo -->
+        <div class="prop-section">
+          <div class="prop-section-title">Línea de Contorno</div>
+          <div class="prop-row">
+            <span class="prop-label">Color de Línea:</span>
+            <div class="color-swatch-btn">
+              <div class="color-swatch-preview" id="prop-stroke-preview" style="background:#0f6cbd;"></div>
+              <input type="color" id="prop-stroke-color" value="#0f6cbd" style="position:absolute; opacity:0; width:100%; height:100%; cursor:pointer;">
+            </div>
+          </div>
+          <div class="prop-row">
+            <span class="prop-label">Grosor:</span>
+            <select class="ribbon-select" id="prop-stroke-width" style="width:100px;">
+              <option value="1">1 px</option>
+              <option value="2">2 px</option>
+              <option value="3">3 px</option>
+              <option value="4">4 px</option>
+              <option value="6">6 px</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sección Texto -->
+        <div class="prop-section">
+          <div class="prop-section-title">Texto y Etiqueta</div>
+          <div class="prop-row" style="flex-direction:column; align-items:stretch; gap:6px;">
+            <textarea id="prop-text-content" rows="3" style="width:100%; border:1px solid var(--border-color); border-radius:3px; padding:6px; font-family:inherit; font-size:11px;" placeholder="Texto de la figura..."></textarea>
+          </div>
+          <div class="prop-row">
+            <span class="prop-label">Color:</span>
+            <input type="color" id="prop-text-color" value="#242424">
+            <span class="prop-label">Tamaño:</span>
+            <input type="number" class="prop-input" id="prop-text-size" value="12" style="width:50px;">
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ==========================================================================
+       BARRA DE ESTADO INFERIOR
+       ========================================================================== -->
+  <footer class="status-bar">
+    <div class="status-left">
+      <span>Página-1</span>
+      <span id="status-selection-info">Listo</span>
+      <span id="status-coords">X: 0 mm &nbsp; Y: 0 mm</span>
+    </div>
+    <div class="status-right">
+      <button class="zoom-btn" id="btn-zoom-out" title="Alejar">-</button>
+      <input type="range" class="zoom-slider" id="zoom-slider" min="25" max="250" value="100">
+      <button class="zoom-btn" id="btn-zoom-in" title="Acercar">+</button>
+      <span class="zoom-level" id="zoom-percentage">100%</span>
+      <button class="zoom-btn" id="btn-status-zoom-fit" title="Ajustar ventana" style="font-size:10px;">[ ]</button>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL DE ARCHIVO Y EXPORTACIÓN / AYUDA
+       ========================================================================== -->
+  <div class="modal-overlay" id="file-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span>Menú Archivo - Microsoft Visio</span>
+        <button id="btn-close-file-modal" style="background:none; border:none; color:#fff; cursor:pointer; font-size:16px;">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom:12px; color:var(--text-secondary);">Elige una acción para tu diagrama actual:</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button class="btn-secondary" id="action-new-doc" style="text-align:left; padding:10px;">
+            <strong>Nuevo Diagrama en Blanco</strong>
+            <div style="font-size:11px; color:#666;">Crea un lienzo nuevo y vacía las formas actuales.</div>
+          </button>
+          <button class="btn-secondary" id="action-save-json" style="text-align:left; padding:10px;">
+            <strong>Guardar Archivo (.visio.json)</strong>
+            <div style="font-size:11px; color:#666;">Guarda la estructura completa con nodos y conexiones.</div>
+          </button>
+          <button class="btn-secondary" id="action-open-json" style="text-align:left; padding:10px;">
+            <strong>Abrir Archivo (.visio.json)</strong>
+            <div style="font-size:11px; color:#666;">Carga un diagrama previamente guardado desde tu disco.</div>
+          </button>
+          <button class="btn-secondary" id="action-export-svg" style="text-align:left; padding:10px;">
+            <strong>Exportar Vectorial (.SVG)</strong>
+            <div style="font-size:11px; color:#666;">Gráfico vectorial nítido para impresión o diseño web.</div>
+          </button>
+          <button class="btn-secondary" id="action-export-png" style="text-align:left; padding:10px;">
+            <strong>Exportar Imagen (.PNG de Alta Resolución)</strong>
+            <div style="font-size:11px; color:#666;">Renderizado de mapa de bits nítido a 2x de resolución.</div>
+          </button>
+        </div>
+
+        <!-- Sección de Plantillas de Ejemplo -->
+        <div style="margin-top:14px; padding-top:12px; border-top:1px solid #e0e0e0;">
+          <div style="font-size:11px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.4px;">
+            Cargar Plantillas de Ejemplo (1 Clic)
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button class="btn-secondary" id="action-sample-auth" style="text-align:left; padding:8px 10px;">
+              <strong>1. Diagrama de Flujo: Autenticación & MFA</strong>
+              <div style="font-size:11px; color:#666;">Decisiones, validaciones, base de datos y terminales.</div>
+            </button>
+            <button class="btn-secondary" id="action-sample-cloud" style="text-align:left; padding:8px 10px;">
+              <strong>2. Arquitectura Cloud: Microservicios & API Gateway</strong>
+              <div style="font-size:11px; color:#666;">Actores, gateway, microservicios, bases de datos y nube externa.</div>
+            </button>
+            <button class="btn-secondary" id="action-sample-proc" style="text-align:left; padding:8px 10px;">
+              <strong>3. Proceso BPM: Aprobación de Órdenes de Compra</strong>
+              <div style="font-size:11px; color:#666;">Documentos, condiciones de monto y firmas gerenciales.</div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-file-cancel">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diálogo de Atajos -->
+  <div class="modal-overlay" id="shortcuts-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span>Atajos de Teclado de Visio</span>
+        <button id="btn-close-shortcuts-modal" style="background:none; border:none; color:#fff; cursor:pointer; font-size:16px;">✕</button>
+      </div>
+      <div class="modal-body" style="font-size:12px;">
+        <table style="width:100%; border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>V / Esc</strong></td><td>Herramienta Puntero</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>C</strong></td><td>Herramienta Conector Inteligente</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>H / Barra Espaciadora</strong></td><td>Herramienta Mano / Paneo</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Ctrl + Z</strong></td><td>Deshacer</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Ctrl + Y</strong></td><td>Rehacer</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Ctrl + C / Ctrl + V</strong></td><td>Copiar / Pegar</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Ctrl + D</strong></td><td>Duplicar formas seleccionadas</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Supr / Backspace</strong></td><td>Eliminar elementos seleccionados</td></tr>
+          <tr style="border-bottom:1px solid #eee;"><td style="padding:6px 0;"><strong>Doble Clic</strong></td><td>Editar texto de forma o conector</td></tr>
+          <tr><td style="padding:6px 0;"><strong>Rueda Ratón</strong></td><td>Zoom Dinámico (con Ctrl o Alt)</td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btn-shortcuts-ok">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input oculto para carga de archivos JSON -->
+  <input type="file" id="file-input-hidden" accept=".json,.visio.json" style="display:none;">
+
+  <!-- Toast de notificación -->
+  <div class="toast-msg" id="toast-message">Mensaje</div>
+
+  <!-- Canvas oculto para exportación PNG -->
+  <canvas id="export-png-canvas" style="display:none;"></canvas>
+
+  <!-- ==========================================================================
+       LÓGICA JAVASCRIPT: ARQUITECTURA AGÉNTICA VISIO MODULAR
+       ========================================================================== -->
+  <script>
+    /**
+     * VISIO SINGLE-FILE ENGINE
+     * Arquitectura Modular basada en submódulos especializados:
+     * - Visio.State: Estado central de nodos, conexiones, selecciones y vista
+     * - Visio.History: Pila de Undo / Redo inmutable
+     * - Visio.Canvas: Viewport, zoom, paneo, cuadrícula y reglas
+     * - Visio.Stencils: Definiciones de formas vectoriales y creación
+     * - Visio.Transform: Selección, 8 manijas de escala, rotación y drag
+     * - Visio.Connectors: Puertos magnéticos, líneas ortogonales y cálculo Manhattan
+     * - Visio.IO: Guardar/Cargar JSON, exportar SVG y PNG
+     */
+
+    const Visio = {
+      // Estado Central
+      State: {
+        shapes: [],        // { id, type, x, y, w, h, angle, fill, stroke, strokeWidth, strokeDash, opacity, text, fontColor, fontSize, fontFamily, isBold, isItalic, isUnderline }
+        connectors: [],    // { id, fromId, fromPort, toId, toPort, routing, arrowType, stroke, strokeWidth, text }
+        selectedIds: [],   // IDs de formas o conectores seleccionados
+        activeTool: 'pointer', // 'pointer', 'connector', 'pan', 'text'
+        zoom: 1.0,
+        panX: 40,
+        panY: 30,
+        pageWidth: 1600,
+        pageHeight: 1100,
+        gridSize: 15,
+        snapToGrid: true,
+        showGrid: true,
+        showRulers: true,
+        clipboard: null,
+        currentConnectorType: 'orthogonal',
+        currentArrowType: 'end-arrow',
+        currentFillColor: '#ffffff',
+        currentStrokeColor: '#0f6cbd',
+        currentStrokeWidth: 2,
+        currentStrokeDash: 'solid'
+      },
+
+      // Pila de Historial Undo / Redo
+      History: {
+        undoStack: [],
+        redoStack: [],
+        maxSteps: 30,
+
+        pushState() {
+          const snapshot = JSON.stringify({
+            shapes: Visio.State.shapes,
+            connectors: Visio.State.connectors
+          });
+          this.undoStack.push(snapshot);
+          if (this.undoStack.length > this.maxSteps) this.undoStack.shift();
+          this.redoStack = []; // limpiar rama redo
+          Visio.UI.updateUndoRedoButtons();
+        },
+
+        undo() {
+          if (this.undoStack.length === 0) return;
+          const current = JSON.stringify({
+            shapes: Visio.State.shapes,
+            connectors: Visio.State.connectors
+          });
+          this.redoStack.push(current);
+          const previous = JSON.parse(this.undoStack.pop());
+          Visio.State.shapes = previous.shapes;
+          Visio.State.connectors = previous.connectors;
+          Visio.Selection.clearSelection();
+          Visio.Renderer.renderAll();
+          Visio.UI.updateUndoRedoButtons();
+          Visio.UI.showToast("Deshecho");
+        },
+
+        redo() {
+          if (this.redoStack.length === 0) return;
+          const current = JSON.stringify({
+            shapes: Visio.State.shapes,
+            connectors: Visio.State.connectors
+          });
+          this.undoStack.push(current);
+          const next = JSON.parse(this.redoStack.pop());
+          Visio.State.shapes = next.shapes;
+          Visio.State.connectors = next.connectors;
+          Visio.Selection.clearSelection();
+          Visio.Renderer.renderAll();
+          Visio.UI.updateUndoRedoButtons();
+          Visio.UI.showToast("Rehecho");
+        }
+      },
+
+      // Definiciones Vectoriales de las Formas de Visio
+      Stencils: {
+        definitions: {
+          process: {
+            name: "Proceso",
+            defaultW: 120,
+            defaultH: 70,
+            defaultText: "Proceso",
+            render(shape) {
+              return `<rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="3" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          decision: {
+            name: "Decisión",
+            defaultW: 120,
+            defaultH: 80,
+            defaultText: "¿Condición?",
+            render(shape) {
+              const pts = `${shape.w/2},0 ${shape.w},${shape.h/2} ${shape.w/2},${shape.h} 0,${shape.h/2}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          terminal: {
+            name: "Inicio/Fin",
+            defaultW: 120,
+            defaultH: 60,
+            defaultText: "Inicio",
+            render(shape) {
+              const r = Math.min(shape.w, shape.h) / 2;
+              return `<rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="${r}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          document: {
+            name: "Documento",
+            defaultW: 120,
+            defaultH: 75,
+            defaultText: "Documento",
+            render(shape) {
+              const waveY = shape.h - 14;
+              const path = `M 0,0 L ${shape.w},0 L ${shape.w},${waveY} Q ${shape.w * 0.75},${shape.h - 24} ${shape.w * 0.5},${waveY} Q ${shape.w * 0.25},${shape.h - 4} 0,${waveY} Z`;
+              return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          data: {
+            name: "Datos (E/S)",
+            defaultW: 125,
+            defaultH: 65,
+            defaultText: "Datos",
+            render(shape) {
+              const skew = 20;
+              const pts = `${skew},0 ${shape.w},0 ${shape.w - skew},${shape.h} 0,${shape.h}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          database: {
+            name: "Base de Datos",
+            defaultW: 100,
+            defaultH: 80,
+            defaultText: "Base de Datos",
+            render(shape) {
+              const ry = 12;
+              const path = `M 0,${ry} L 0,${shape.h - ry} A ${shape.w/2} ${ry} 0 0 0 ${shape.w} ${shape.h - ry} L ${shape.w},${ry} A ${shape.w/2} ${ry} 0 0 0 0 ${ry} Z`;
+              return `
+                <path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>
+                <ellipse cx="${shape.w/2}" cy="${ry}" rx="${shape.w/2}" ry="${ry}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+              `;
+            }
+          },
+          circle: {
+            name: "Círculo",
+            defaultW: 80,
+            defaultH: 80,
+            defaultText: "Estado",
+            render(shape) {
+              return `<ellipse class="shape-geom" cx="${shape.w/2}" cy="${shape.h/2}" rx="${shape.w/2}" ry="${shape.h/2}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          cloud: {
+            name: "Nube",
+            defaultW: 130,
+            defaultH: 80,
+            defaultText: "Red / Nube",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const path = `M ${w*0.25},${h*0.75} C ${w*0.05},${h*0.75} 0,${h*0.45} ${w*0.2},${h*0.4} C ${w*0.15},${h*0.15} ${w*0.45},${h*0.1} ${w*0.5},${h*0.25} C ${w*0.65},${h*0.05} ${w*0.85},${h*0.15} ${w*0.85},${h*0.4} C ${w*1.02},${h*0.45} ${w*1.02},${h*0.75} ${w*0.8},${h*0.75} Z`;
+              return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          actor: {
+            name: "Actor",
+            defaultW: 60,
+            defaultH: 90,
+            defaultText: "Usuario",
+            render(shape) {
+              const cx = shape.w / 2;
+              const headR = 12;
+              return `
+                <g class="shape-geom">
+                  <rect x="0" y="0" width="${shape.w}" height="${shape.h}" fill="transparent" stroke="none"/>
+                  <circle cx="${cx}" cy="${headR + 4}" r="${headR}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                  <line x1="${cx}" y1="${headR*2 + 4}" x2="${cx}" y2="${shape.h - 30}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                  <line x1="8" y1="${headR*2 + 16}" x2="${shape.w - 8}" y2="${headR*2 + 16}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                  <line x1="${cx}" y1="${shape.h - 30}" x2="10" y2="${shape.h - 4}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                  <line x1="${cx}" y1="${shape.h - 30}" x2="${shape.w - 10}" y2="${shape.h - 4}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                </g>
+              `;
+            }
+          },
+          note: {
+            name: "Nota Adhesiva",
+            defaultW: 110,
+            defaultH: 80,
+            defaultText: "Nota explicativa",
+            render(shape) {
+              const fold = 16;
+              const path = `M 0,0 L ${shape.w - fold},0 L ${shape.w},${fold} L ${shape.w},${shape.h} L 0,${shape.h} Z`;
+              return `
+                <path class="shape-geom" d="${path}" fill="#fff9d6" stroke="#c9a834" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <polygon points="${shape.w - fold},0 ${shape.w - fold},${fold} ${shape.w},${fold}" fill="#fae896" stroke="#c9a834" stroke-width="${shape.strokeWidth}"/>
+              `;
+            }
+          }
+        },
+
+        createShape(type, x, y) {
+          const def = this.definitions[type] || this.definitions.process;
+          const id = 'shape_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+          
+          let shapeX = x;
+          let shapeY = y;
+          if (Visio.State.snapToGrid) {
+            shapeX = Math.round(shapeX / Visio.State.gridSize) * Visio.State.gridSize;
+            shapeY = Math.round(shapeY / Visio.State.gridSize) * Visio.State.gridSize;
+          }
+
+          const newShape = {
+            id,
+            type,
+            x: shapeX,
+            y: shapeY,
+            w: def.defaultW,
+            h: def.defaultH,
+            angle: 0,
+            fill: type === 'note' ? '#fff9d6' : Visio.State.currentFillColor,
+            stroke: type === 'note' ? '#c9a834' : Visio.State.currentStrokeColor,
+            strokeWidth: Visio.State.currentStrokeWidth,
+            strokeDash: Visio.State.currentStrokeDash,
+            opacity: 1,
+            text: def.defaultText,
+            fontColor: '#242424',
+            fontSize: 12,
+            fontFamily: 'Segoe UI',
+            isBold: false,
+            isItalic: false,
+            isUnderline: false
+          };
+
+          Visio.History.pushState();
+          Visio.State.shapes.push(newShape);
+          Visio.Selection.setSelection([id]);
+          Visio.Renderer.renderAll();
+          Visio.UI.showToast(`Forma "${def.name}" insertada`);
+          return newShape;
+        }
+      },
+
+      // Motor de Renderizado Vectorial (SVG)
+      Renderer: {
+        getDashArray(style) {
+          if (style === 'dashed') return '6,4';
+          if (style === 'dotted') return '2,3';
+          return 'none';
+        },
+
+        renderAll() {
+          this.renderShapes();
+          this.renderConnectors();
+          Visio.Transform.updateSelectionOverlay();
+          Visio.Rulers.update();
+        },
+
+        renderShapes() {
+          const container = document.getElementById('layer-shapes');
+          container.innerHTML = '';
+
+          Visio.State.shapes.forEach(shape => {
+            const def = Visio.Stencils.definitions[shape.type] || Visio.Stencils.definitions.process;
+            const isSelected = Visio.State.selectedIds.includes(shape.id);
+
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('class', `visio-shape ${isSelected ? 'selected' : ''}`);
+            g.setAttribute('id', shape.id);
+            g.setAttribute('transform', `translate(${shape.x}, ${shape.y}) rotate(${shape.angle} ${shape.w/2} ${shape.h/2})`);
+
+            // Geometría
+            let shapeHtml = def.render(shape);
+
+            // Texto In-situ centrado
+            let textY = shape.h / 2;
+            if (shape.type === 'database') textY += 6;
+            if (shape.type === 'document') textY -= 4;
+
+            const fontWeight = shape.isBold ? 'bold' : 'normal';
+            const fontStyle = shape.isItalic ? 'italic' : 'normal';
+            const textDecor = shape.isUnderline ? 'underline' : 'none';
+
+            // Partición de líneas para texto largo
+            const lines = (shape.text || '').split('\n');
+            const lineHeight = shape.fontSize * 1.25;
+            const startY = textY - ((lines.length - 1) * lineHeight) / 2;
+
+            let textTspans = '';
+            lines.forEach((line, idx) => {
+              textTspans += `<tspan x="${shape.w/2}" y="${startY + idx * lineHeight}" dy="${idx === 0 ? '0.35em' : 0}">${Visio.Utils.escapeXml(line)}</tspan>`;
+            });
+
+            shapeHtml += `
+              <text class="shape-text" x="${shape.w/2}" y="${textY}" text-anchor="middle"
+                fill="${shape.fontColor}" font-size="${shape.fontSize}" font-family="${shape.fontFamily}"
+                font-weight="${fontWeight}" font-style="${fontStyle}" text-decoration="${textDecor}"
+                pointer-events="none" style="user-select:none;">
+                ${textTspans}
+              </text>
+            `;
+
+            // Puertos Magnéticos de Conexión (Norte, Sur, Este, Oeste)
+            const ports = Visio.Connectors.getShapePorts(shape);
+            for (const [key, pt] of Object.entries(ports)) {
+              shapeHtml += `<circle class="connection-port" data-port="${key}" data-shape-id="${shape.id}" cx="${pt.x - shape.x}" cy="${pt.y - shape.y}" r="4.5"/>`;
+            }
+
+            g.innerHTML = shapeHtml;
+            container.appendChild(g);
+          });
+        },
+
+        renderConnectors() {
+          const container = document.getElementById('layer-connectors');
+          container.innerHTML = '';
+
+          Visio.State.connectors.forEach(conn => {
+            const isSelected = Visio.State.selectedIds.includes(conn.id);
+            const pathData = Visio.Connectors.calculatePath(conn);
+            if (!pathData) return;
+
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('class', `visio-connector-group ${isSelected ? 'selected' : ''}`);
+            g.setAttribute('id', conn.id);
+
+            // Marcadores de flecha
+            let markerStart = '';
+            let markerEnd = '';
+            if (conn.arrowType === 'end-arrow' || conn.arrowType === 'both-arrow') {
+              markerEnd = 'url(#marker-arrow-end)';
+            }
+            if (conn.arrowType === 'both-arrow') {
+              markerStart = 'url(#marker-arrow-start)';
+            }
+
+            const strokeColor = isSelected ? 'var(--selection-color)' : (conn.stroke || '#242424');
+            const strokeW = isSelected ? (conn.strokeWidth + 1) : (conn.strokeWidth || 2);
+
+            let html = `
+              <path class="visio-connector-hitbox" data-connector-id="${conn.id}" d="${pathData.d}"/>
+              <path class="visio-connector-path ${isSelected ? 'selected' : ''}" data-connector-id="${conn.id}" d="${pathData.d}"
+                stroke="${strokeColor}" stroke-width="${strokeW}"
+                marker-start="${markerStart}" marker-end="${markerEnd}"/>
+            `;
+
+            // Etiqueta de conector si existe
+            if (conn.text && pathData.midPoint) {
+              html += `
+                <rect x="${pathData.midPoint.x - 25}" y="${pathData.midPoint.y - 10}" width="50" height="20" rx="3" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+                <text x="${pathData.midPoint.x}" y="${pathData.midPoint.y + 4}" text-anchor="middle" font-size="11" fill="#242424" font-weight="500">${Visio.Utils.escapeXml(conn.text)}</text>
+              `;
+            }
+
+            g.innerHTML = html;
+            container.appendChild(g);
+          });
+        }
+      },
+
+      // Sistema de Conectores y Enrutamiento Ortogonal Visio (Manhattan)
+      Connectors: {
+        getShapePorts(shape) {
+          return {
+            north: { x: shape.x + shape.w / 2, y: shape.y, dir: 'up' },
+            south: { x: shape.x + shape.w / 2, y: shape.y + shape.h, dir: 'down' },
+            east:  { x: shape.x + shape.w, y: shape.y + shape.h / 2, dir: 'right' },
+            west:  { x: shape.x, y: shape.y + shape.h / 2, dir: 'left' }
+          };
+        },
+
+        calculatePath(conn) {
+          const fromShape = Visio.State.shapes.find(s => s.id === conn.fromId);
+          const toShape = Visio.State.shapes.find(s => s.id === conn.toId);
+          if (!fromShape || !toShape) return null;
+
+          const fromPorts = this.getShapePorts(fromShape);
+          const toPorts = this.getShapePorts(toShape);
+
+          const startPt = fromPorts[conn.fromPort] || fromPorts.east;
+          const endPt = toPorts[conn.toPort] || toPorts.west;
+
+          const routing = conn.routing || Visio.State.currentConnectorType;
+
+          if (routing === 'straight') {
+            return {
+              d: `M ${startPt.x},${startPt.y} L ${endPt.x},${endPt.y}`,
+              midPoint: { x: (startPt.x + endPt.x)/2, y: (startPt.y + endPt.y)/2 }
+            };
+          }
+
+          if (routing === 'curved') {
+            const dx = Math.abs(endPt.x - startPt.x) * 0.5;
+            const dy = Math.abs(endPt.y - startPt.y) * 0.5;
+            let cp1x = startPt.x, cp1y = startPt.y;
+            let cp2x = endPt.x, cp2y = endPt.y;
+
+            if (startPt.dir === 'right') cp1x += dx;
+            else if (startPt.dir === 'left') cp1x -= dx;
+            else if (startPt.dir === 'up') cp1y -= dy;
+            else if (startPt.dir === 'down') cp1y += dy;
+
+            if (endPt.dir === 'right') cp2x += dx;
+            else if (endPt.dir === 'left') cp2x -= dx;
+            else if (endPt.dir === 'up') cp2y -= dy;
+            else if (endPt.dir === 'down') cp2y += dy;
+
+            return {
+              d: `M ${startPt.x},${startPt.y} C ${cp1x},${cp1y} ${cp2x},${cp2y} ${endPt.x},${endPt.y}`,
+              midPoint: { x: (startPt.x + endPt.x)/2, y: (startPt.y + endPt.y)/2 }
+            };
+          }
+
+          // Enrutamiento Ortogonal Manhattan Clásico de Visio
+          const points = this.getManhattanRoute(startPt, endPt);
+          const d = points.reduce((acc, pt, idx) => `${acc} ${idx === 0 ? 'M' : 'L'} ${pt.x},${pt.y}`, '');
+          const midIdx = Math.floor(points.length / 2);
+          const midPoint = points[midIdx] || { x: (startPt.x + endPt.x)/2, y: (startPt.y + endPt.y)/2 };
+
+          return { d, midPoint };
+        },
+
+        getManhattanRoute(p1, p2) {
+          const pts = [{ x: p1.x, y: p1.y }];
+          const margin = 20;
+
+          let curX = p1.x;
+          let curY = p1.y;
+
+          if (p1.dir === 'right') curX += margin;
+          else if (p1.dir === 'left') curX -= margin;
+          else if (p1.dir === 'down') curY += margin;
+          else if (p1.dir === 'up') curY -= margin;
+          pts.push({ x: curX, y: curY });
+
+          let targetX = p2.x;
+          let targetY = p2.y;
+          if (p2.dir === 'right') targetX += margin;
+          else if (p2.dir === 'left') targetX -= margin;
+          else if (p2.dir === 'down') targetY += margin;
+          else if (p2.dir === 'up') targetY -= margin;
+
+          if (p1.dir === 'right' || p1.dir === 'left') {
+            const midX = (curX + targetX) / 2;
+            pts.push({ x: midX, y: curY });
+            pts.push({ x: midX, y: targetY });
+          } else {
+            const midY = (curY + targetY) / 2;
+            pts.push({ x: curX, y: midY });
+            pts.push({ x: targetX, y: midY });
+          }
+
+          pts.push({ x: targetX, y: targetY });
+          pts.push({ x: p2.x, y: p2.y });
+
+          return this.simplifyCollinear(pts);
+        },
+
+        simplifyCollinear(pts) {
+          if (pts.length <= 2) return pts;
+          const res = [pts[0]];
+          for (let i = 1; i < pts.length - 1; i++) {
+            const prev = res[res.length - 1];
+            const curr = pts[i];
+            const next = pts[i + 1];
+
+            const isHoriz = prev.y === curr.y && curr.y === next.y;
+            const isVert = prev.x === curr.x && curr.x === next.x;
+
+            if (!isHoriz && !isVert) {
+              res.push(curr);
+            }
+          }
+          res.push(pts[pts.length - 1]);
+          return res;
+        },
+
+        createConnector(fromId, fromPort, toId, toPort) {
+          if (fromId === toId) return null;
+          const exists = Visio.State.connectors.some(c => c.fromId === fromId && c.fromPort === fromPort && c.toId === toId && c.toPort === toPort);
+          if (exists) return null;
+
+          const id = 'conn_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+          const newConn = {
+            id,
+            fromId,
+            fromPort,
+            toId,
+            toPort,
+            routing: Visio.State.currentConnectorType,
+            arrowType: Visio.State.currentArrowType,
+            stroke: Visio.State.currentStrokeColor,
+            strokeWidth: Visio.State.currentStrokeWidth,
+            text: ''
+          };
+
+          Visio.History.pushState();
+          Visio.State.connectors.push(newConn);
+          Visio.Renderer.renderAll();
+          Visio.UI.showToast("Conexión establecida");
+          return newConn;
+        }
+      },
+
+      // Sistema de Selección, Transformación (8 Handles) y Arrastre
+      Selection: {
+        setSelection(ids) {
+          Visio.State.selectedIds = [...ids];
+          Visio.Renderer.renderAll();
+          Visio.UI.updatePropertiesPanel();
+          Visio.UI.updateStatusSelection();
+        },
+
+        clearSelection() {
+          Visio.State.selectedIds = [];
+          Visio.Renderer.renderAll();
+          Visio.UI.updatePropertiesPanel();
+          Visio.UI.updateStatusSelection();
+        },
+
+        getSelectedShapes() {
+          return Visio.State.shapes.filter(s => Visio.State.selectedIds.includes(s.id));
+        },
+
+        getSelectedConnectors() {
+          return Visio.State.connectors.filter(c => Visio.State.selectedIds.includes(c.id));
+        },
+
+        deleteSelected() {
+          if (Visio.State.selectedIds.length === 0) return;
+          Visio.History.pushState();
+
+          const idsToDelete = new Set(Visio.State.selectedIds);
+          Visio.State.shapes = Visio.State.shapes.filter(s => !idsToDelete.has(s.id));
+          Visio.State.connectors = Visio.State.connectors.filter(c => 
+            !idsToDelete.has(c.id) && !idsToDelete.has(c.fromId) && !idsToDelete.has(c.toId)
+          );
+
+          this.clearSelection();
+          Visio.Renderer.renderAll();
+          Visio.UI.showToast("Elementos eliminados");
+        },
+
+        duplicateSelected() {
+          const selectedShapes = this.getSelectedShapes();
+          if (selectedShapes.length === 0) return;
+
+          Visio.History.pushState();
+          const newIds = [];
+          selectedShapes.forEach(s => {
+            const clone = JSON.parse(JSON.stringify(s));
+            clone.id = 'shape_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+            clone.x += 30;
+            clone.y += 30;
+            Visio.State.shapes.push(clone);
+            newIds.push(clone.id);
+          });
+
+          this.setSelection(newIds);
+          Visio.UI.showToast("Formas duplicadas");
+        }
+      },
+
+      // Manipuladores de Escala y Rotación
+      Transform: {
+        updateSelectionOverlay() {
+          const box = document.getElementById('selection-bounding-box');
+          const handlesGroup = document.getElementById('transform-handles-group');
+          const rotLine = document.getElementById('rotate-handle-line');
+          const rotHandle = document.getElementById('rotate-handle');
+
+          const selectedShapes = Visio.Selection.getSelectedShapes();
+
+          if (selectedShapes.length === 0) {
+            box.style.display = 'none';
+            handlesGroup.style.display = 'none';
+            rotLine.style.display = 'none';
+            rotHandle.style.display = 'none';
+            return;
+          }
+
+          if (selectedShapes.length === 1) {
+            const s = selectedShapes[0];
+            box.style.display = 'block';
+            handlesGroup.style.display = 'block';
+            rotLine.style.display = 'block';
+            rotHandle.style.display = 'block';
+
+            box.setAttribute('x', s.x - 2);
+            box.setAttribute('y', s.y - 2);
+            box.setAttribute('width', s.w + 4);
+            box.setAttribute('height', s.h + 4);
+
+            const hData = [
+              { name: 'nw', x: s.x, y: s.y, class: 'handle-nw' },
+              { name: 'n',  x: s.x + s.w/2, y: s.y, class: 'handle-n' },
+              { name: 'ne', x: s.x + s.w, y: s.y, class: 'handle-ne' },
+              { name: 'e',  x: s.x + s.w, y: s.y + s.h/2, class: 'handle-e' },
+              { name: 'se', x: s.x + s.w, y: s.y + s.h, class: 'handle-se' },
+              { name: 's',  x: s.x + s.w/2, y: s.y + s.h, class: 'handle-s' },
+              { name: 'sw', x: s.x, y: s.y + s.h, class: 'handle-sw' },
+              { name: 'w',  x: s.x, y: s.y + s.h/2, class: 'handle-w' }
+            ];
+
+            let handlesHtml = '';
+            hData.forEach(h => {
+              handlesHtml += `<rect class="transform-handle ${h.class}" data-handle="${h.name}" data-shape-id="${s.id}" x="${h.x - 4}" y="${h.y - 4}" width="8" height="8"/>`;
+            });
+            handlesGroup.innerHTML = handlesHtml;
+
+            const rotY = s.y - 24;
+            rotLine.setAttribute('x1', s.x + s.w/2);
+            rotLine.setAttribute('y1', s.y);
+            rotLine.setAttribute('x2', s.x + s.w/2);
+            rotLine.setAttribute('y2', rotY);
+
+            rotHandle.setAttribute('cx', s.x + s.w/2);
+            rotHandle.setAttribute('cy', rotY);
+            rotHandle.setAttribute('data-shape-id', s.id);
+          } else {
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            selectedShapes.forEach(s => {
+              minX = Math.min(minX, s.x);
+              minY = Math.min(minY, s.y);
+              maxX = Math.max(maxX, s.x + s.w);
+              maxY = Math.max(maxY, s.y + s.h);
+            });
+
+            box.style.display = 'block';
+            box.setAttribute('x', minX - 4);
+            box.setAttribute('y', minY - 4);
+            box.setAttribute('width', (maxX - minX) + 8);
+            box.setAttribute('height', (maxY - minY) + 8);
+
+            handlesGroup.style.display = 'none';
+            rotLine.style.display = 'none';
+            rotHandle.style.display = 'none';
+          }
+        }
+      },
+
+      // Viewport, Zoom, Paneo y Reglas Métricas
+      Canvas: {
+        init() {
+          this.applyTransform();
+          this.bindEvents();
+          Visio.Rulers.init();
+        },
+
+        applyTransform() {
+          const group = document.getElementById('viewport-transform-group');
+          group.setAttribute('transform', `translate(${Visio.State.panX}, ${Visio.State.panY}) scale(${Visio.State.zoom})`);
+          Visio.Rulers.update();
+          document.getElementById('zoom-percentage').innerText = Math.round(Visio.State.zoom * 100) + '%';
+          document.getElementById('zoom-slider').value = Math.round(Visio.State.zoom * 100);
+        },
+
+        setZoom(newZoom, centerX, centerY) {
+          const clamped = Math.max(0.25, Math.min(2.5, newZoom));
+          if (centerX !== undefined && centerY !== undefined) {
+            const factor = clamped / Visio.State.zoom;
+            Visio.State.panX = centerX - (centerX - Visio.State.panX) * factor;
+            Visio.State.panY = centerY - (centerY - Visio.State.panY) * factor;
+          }
+          Visio.State.zoom = clamped;
+          this.applyTransform();
+        },
+
+        zoomFit() {
+          const wrapper = document.getElementById('canvas-scroll-area');
+          const w = wrapper.clientWidth;
+          const h = wrapper.clientHeight;
+          const zoomX = (w - 80) / Visio.State.pageWidth;
+          const zoomY = (h - 80) / Visio.State.pageHeight;
+          const fitZoom = Math.min(zoomX, zoomY, 1.2);
+          Visio.State.zoom = Math.max(0.25, fitZoom);
+          Visio.State.panX = (w - Visio.State.pageWidth * Visio.State.zoom) / 2;
+          Visio.State.panY = (h - Visio.State.pageHeight * Visio.State.zoom) / 2;
+          this.applyTransform();
+          Visio.UI.showToast("Vista ajustada al diagrama");
+        },
+
+        clientToCanvas(clientX, clientY) {
+          const rect = document.getElementById('visio-svg-canvas').getBoundingClientRect();
+          const svgX = clientX - rect.left;
+          const svgY = clientY - rect.top;
+          return {
+            x: (svgX - Visio.State.panX) / Visio.State.zoom,
+            y: (svgY - Visio.State.panY) / Visio.State.zoom
+          };
+        },
+
+        bindEvents() {
+          const scrollArea = document.getElementById('canvas-scroll-area');
+
+          scrollArea.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.ctrlKey || e.altKey) {
+              const delta = e.deltaY < 0 ? 0.1 : -0.1;
+              const rect = scrollArea.getBoundingClientRect();
+              const cx = e.clientX - rect.left;
+              const cy = e.clientY - rect.top;
+              Visio.Canvas.setZoom(Visio.State.zoom + delta, cx, cy);
+            } else {
+              Visio.State.panX -= e.deltaX * 0.7;
+              Visio.State.panY -= e.deltaY * 0.7;
+              Visio.Canvas.applyTransform();
+            }
+          }, { passive: false });
+
+          let isDragging = false;
+          let dragAction = null;
+          let dragStart = { x: 0, y: 0 };
+          let initialShapePositions = [];
+          let activeHandle = null;
+          let resizingShape = null;
+          let initialShapeBounds = null;
+          let connectorStart = null;
+
+          scrollArea.addEventListener('mousedown', (e) => {
+            if (e.button !== 0 && e.button !== 1) return;
+            const pt = Visio.Canvas.clientToCanvas(e.clientX, e.clientY);
+            dragStart = { x: e.clientX, y: e.clientY };
+
+            if (e.button === 1 || Visio.State.activeTool === 'pan' || e.spaceKey) {
+              isDragging = true;
+              dragAction = 'pan';
+              return;
+            }
+
+            if (e.target.id === 'rotate-handle') {
+              isDragging = true;
+              dragAction = 'rotate';
+              resizingShape = Visio.State.shapes.find(s => s.id === e.target.getAttribute('data-shape-id'));
+              Visio.History.pushState();
+              return;
+            }
+
+            if (e.target.classList.contains('transform-handle')) {
+              isDragging = true;
+              dragAction = 'handle-resize';
+              activeHandle = e.target.getAttribute('data-handle');
+              const shapeId = e.target.getAttribute('data-shape-id');
+              resizingShape = Visio.State.shapes.find(s => s.id === shapeId);
+              initialShapeBounds = { ...resizingShape };
+              Visio.History.pushState();
+              return;
+            }
+
+            if (e.target.classList.contains('connection-port') || Visio.State.activeTool === 'connector') {
+              if (e.target.classList.contains('connection-port')) {
+                isDragging = true;
+                dragAction = 'connector-drag';
+                connectorStart = {
+                  shapeId: e.target.getAttribute('data-shape-id'),
+                  port: e.target.getAttribute('data-port'),
+                  x: pt.x,
+                  y: pt.y
+                };
+                return;
+              }
+            }
+
+            const shapeGroup = e.target.closest('.visio-shape');
+            if (shapeGroup) {
+              const shapeId = shapeGroup.id;
+              if (e.shiftKey) {
+                if (Visio.State.selectedIds.includes(shapeId)) {
+                  Visio.Selection.setSelection(Visio.State.selectedIds.filter(id => id !== shapeId));
+                } else {
+                  Visio.Selection.setSelection([...Visio.State.selectedIds, shapeId]);
+                }
+              } else {
+                if (!Visio.State.selectedIds.includes(shapeId)) {
+                  Visio.Selection.setSelection([shapeId]);
+                }
+              }
+
+              isDragging = true;
+              dragAction = 'shape-drag';
+              Visio.History.pushState();
+              initialShapePositions = Visio.Selection.getSelectedShapes().map(s => ({ id: s.id, x: s.x, y: s.y }));
+              return;
+            }
+
+            const connGroup = e.target.closest('.visio-connector-group') || (e.target.dataset && e.target.dataset.connectorId ? e.target : null);
+            if (connGroup) {
+              const connId = connGroup.id || e.target.dataset.connectorId;
+              Visio.Selection.setSelection([connId]);
+              return;
+            }
+
+            Visio.Selection.clearSelection();
+            isDragging = true;
+            dragAction = 'rubber-band';
+            const rb = document.getElementById('rubber-band-box');
+            rb.style.display = 'block';
+            rb.setAttribute('x', pt.x);
+            rb.setAttribute('y', pt.y);
+            rb.setAttribute('width', 0);
+            rb.setAttribute('height', 0);
+          });
+
+          window.addEventListener('mousemove', (e) => {
+            const pt = Visio.Canvas.clientToCanvas(e.clientX, e.clientY);
+            
+            const mmX = Math.round(pt.x * 0.264583);
+            const mmY = Math.round(pt.y * 0.264583);
+            document.getElementById('status-coords').innerText = `X: ${mmX} mm   Y: ${mmY} mm`;
+
+            if (!isDragging) return;
+
+            if (dragAction === 'pan') {
+              const dx = e.clientX - dragStart.x;
+              const dy = e.clientY - dragStart.y;
+              Visio.State.panX += dx;
+              Visio.State.panY += dy;
+              dragStart = { x: e.clientX, y: e.clientY };
+              Visio.Canvas.applyTransform();
+              return;
+            }
+
+            if (dragAction === 'shape-drag') {
+              const dx = (e.clientX - dragStart.x) / Visio.State.zoom;
+              const dy = (e.clientY - dragStart.y) / Visio.State.zoom;
+
+              initialShapePositions.forEach(item => {
+                const shape = Visio.State.shapes.find(s => s.id === item.id);
+                if (shape) {
+                  let newX = item.x + dx;
+                  let newY = item.y + dy;
+                  if (Visio.State.snapToGrid) {
+                    newX = Math.round(newX / Visio.State.gridSize) * Visio.State.gridSize;
+                    newY = Math.round(newY / Visio.State.gridSize) * Visio.State.gridSize;
+                  }
+                  shape.x = newX;
+                  shape.y = newY;
+                }
+              });
+
+              Visio.Renderer.renderAll();
+              return;
+            }
+
+            if (dragAction === 'handle-resize' && resizingShape) {
+              const dx = (e.clientX - dragStart.x) / Visio.State.zoom;
+              const dy = (e.clientY - dragStart.y) / Visio.State.zoom;
+              const b = initialShapeBounds;
+
+              let newX = b.x, newY = b.y, newW = b.w, newH = b.h;
+
+              if (activeHandle.includes('e')) newW = Math.max(30, b.w + dx);
+              if (activeHandle.includes('s')) newH = Math.max(25, b.h + dy);
+              if (activeHandle.includes('w')) {
+                const proposedW = b.w - dx;
+                if (proposedW > 30) {
+                  newW = proposedW;
+                  newX = b.x + dx;
+                }
+              }
+              if (activeHandle.includes('n')) {
+                const proposedH = b.h - dy;
+                if (proposedH > 25) {
+                  newH = proposedH;
+                  newY = b.y + dy;
+                }
+              }
+
+              if (Visio.State.snapToGrid) {
+                newW = Math.round(newW / Visio.State.gridSize) * Visio.State.gridSize;
+                newH = Math.round(newH / Visio.State.gridSize) * Visio.State.gridSize;
+                newX = Math.round(newX / Visio.State.gridSize) * Visio.State.gridSize;
+                newY = Math.round(newY / Visio.State.gridSize) * Visio.State.gridSize;
+              }
+
+              resizingShape.x = newX;
+              resizingShape.y = newY;
+              resizingShape.w = newW;
+              resizingShape.h = newH;
+
+              Visio.Renderer.renderAll();
+              Visio.UI.updatePropertiesPanel();
+              return;
+            }
+
+            if (dragAction === 'connector-drag' && connectorStart) {
+              const tempLine = document.getElementById('temp-connector-line');
+              tempLine.style.display = 'block';
+              tempLine.setAttribute('d', `M ${connectorStart.x},${connectorStart.y} L ${pt.x},${pt.y}`);
+              return;
+            }
+
+            if (dragAction === 'rubber-band') {
+              const startCanvas = Visio.Canvas.clientToCanvas(dragStart.x, dragStart.y);
+              const x = Math.min(startCanvas.x, pt.x);
+              const y = Math.min(startCanvas.y, pt.y);
+              const w = Math.abs(pt.x - startCanvas.x);
+              const h = Math.abs(pt.y - startCanvas.y);
+
+              const rb = document.getElementById('rubber-band-box');
+              rb.setAttribute('x', x);
+              rb.setAttribute('y', y);
+              rb.setAttribute('width', w);
+              rb.setAttribute('height', h);
+
+              const enclosed = Visio.State.shapes.filter(s => 
+                s.x >= x && s.x + s.w <= x + w && s.y >= y && s.y + s.h <= y + h
+              ).map(s => s.id);
+              Visio.State.selectedIds = enclosed;
+              Visio.Transform.updateSelectionOverlay();
+              return;
+            }
+          });
+
+          window.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+
+            if (dragAction === 'connector-drag') {
+              document.getElementById('temp-connector-line').style.display = 'none';
+              const targetPort = document.elementFromPoint(e.clientX, e.clientY);
+              if (targetPort && targetPort.classList.contains('connection-port')) {
+                const targetShapeId = targetPort.getAttribute('data-shape-id');
+                const targetPortKey = targetPort.getAttribute('data-port');
+                Visio.Connectors.createConnector(connectorStart.shapeId, connectorStart.port, targetShapeId, targetPortKey);
+              }
+            }
+
+            if (dragAction === 'rubber-band') {
+              document.getElementById('rubber-band-box').style.display = 'none';
+              Visio.Renderer.renderAll();
+              Visio.UI.updatePropertiesPanel();
+            }
+
+            isDragging = false;
+            dragAction = null;
+            activeHandle = null;
+            resizingShape = null;
+            connectorStart = null;
+          });
+
+          scrollArea.addEventListener('dblclick', (e) => {
+            const shapeGroup = e.target.closest('.visio-shape');
+            if (shapeGroup) {
+              const shapeId = shapeGroup.id;
+              const shape = Visio.State.shapes.find(s => s.id === shapeId);
+              if (shape) {
+                Visio.UI.openInlineTextEditor(shape);
+              }
+            }
+          });
+
+          scrollArea.addEventListener('dragover', (e) => e.preventDefault());
+          scrollArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const shapeType = e.dataTransfer.getData('text/plain');
+            if (shapeType) {
+              const pt = Visio.Canvas.clientToCanvas(e.clientX, e.clientY);
+              Visio.Stencils.createShape(shapeType, pt.x, pt.y);
+            }
+          });
+        }
+      },
+
+      // Reglas Métricas Horizontales y Verticales Calibradas
+      Rulers: {
+        topCanvas: null,
+        leftCanvas: null,
+
+        init() {
+          this.topCanvas = document.getElementById('ruler-top-canvas');
+          this.leftCanvas = document.getElementById('ruler-left-canvas');
+          this.update();
+        },
+
+        update() {
+          if (!this.topCanvas || !this.leftCanvas) return;
+          const topWidth = this.topCanvas.parentElement.clientWidth;
+          const leftHeight = this.leftCanvas.parentElement.clientHeight;
+
+          this.topCanvas.width = topWidth;
+          this.topCanvas.height = 20;
+          this.leftCanvas.width = 20;
+          this.leftCanvas.height = leftHeight;
+
+          const ctxTop = this.topCanvas.getContext('2d');
+          const ctxLeft = this.leftCanvas.getContext('2d');
+
+          ctxTop.fillStyle = '#f9f9f9';
+          ctxTop.fillRect(0, 0, topWidth, 20);
+          ctxLeft.fillStyle = '#f9f9f9';
+          ctxLeft.fillRect(0, 0, 20, leftHeight);
+
+          if (!Visio.State.showRulers) return;
+
+          ctxTop.fillStyle = '#666';
+          ctxTop.strokeStyle = '#bfbfbf';
+          ctxTop.font = '9px Segoe UI, sans-serif';
+
+          ctxLeft.fillStyle = '#666';
+          ctxLeft.strokeStyle = '#bfbfbf';
+          ctxLeft.font = '9px Segoe UI, sans-serif';
+
+          const zoom = Visio.State.zoom;
+          const panX = Visio.State.panX;
+          const panY = Visio.State.panY;
+
+          const startX = -panX / zoom;
+          const endX = (topWidth - panX) / zoom;
+          const step = zoom > 1.2 ? 20 : (zoom < 0.6 ? 100 : 50);
+
+          const firstMarkX = Math.floor(startX / step) * step;
+          for (let val = firstMarkX; val < endX; val += step) {
+            const screenX = val * zoom + panX;
+            if (screenX >= 0 && screenX <= topWidth) {
+              ctxTop.beginPath();
+              ctxTop.moveTo(screenX, 10);
+              ctxTop.lineTo(screenX, 20);
+              ctxTop.stroke();
+              ctxTop.fillText(Math.round(val), screenX + 2, 9);
+            }
+          }
+
+          const startY = -panY / zoom;
+          const endY = (leftHeight - panY) / zoom;
+          const firstMarkY = Math.floor(startY / step) * step;
+          for (let val = firstMarkY; val < endY; val += step) {
+            const screenY = val * zoom + panY;
+            if (screenY >= 0 && screenY <= leftHeight) {
+              ctxLeft.beginPath();
+              ctxLeft.moveTo(10, screenY);
+              ctxLeft.lineTo(20, screenY);
+              ctxLeft.stroke();
+              ctxLeft.save();
+              ctxLeft.translate(9, screenY - 2);
+              ctxLeft.rotate(-Math.PI / 2);
+              ctxLeft.fillText(Math.round(val), 0, 0);
+              ctxLeft.restore();
+            }
+          }
+        }
+      },
+
+      // Interfaz de Usuario, Ribbon, Inspección y Notificaciones
+      UI: {
+        init() {
+          this.bindRibbonTabs();
+          this.bindButtons();
+          this.bindPropertiesPanel();
+          this.bindKeyboardShortcuts();
+          this.bindStencilDrag();
+          this.updateUndoRedoButtons();
+        },
+
+        bindRibbonTabs() {
+          const tabs = document.querySelectorAll('.ribbon-tab:not(.file-tab)');
+          tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+              tabs.forEach(t => t.classList.remove('active'));
+              tab.classList.add('active');
+
+              const tabId = tab.getAttribute('data-tab');
+              document.querySelectorAll('.ribbon-content').forEach(c => c.classList.remove('active'));
+              const target = document.getElementById(`content-${tabId}`);
+              if (target) target.classList.add('active');
+            });
+          });
+
+          document.getElementById('tab-file').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'flex';
+          });
+          document.getElementById('btn-close-file-modal').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+          });
+          document.getElementById('btn-file-cancel').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+          });
+
+          document.getElementById('btn-shortcuts-dialog').addEventListener('click', () => {
+            document.getElementById('shortcuts-modal').style.display = 'flex';
+          });
+          document.getElementById('btn-close-shortcuts-modal').addEventListener('click', () => {
+            document.getElementById('shortcuts-modal').style.display = 'none';
+          });
+          document.getElementById('btn-shortcuts-ok').addEventListener('click', () => {
+            document.getElementById('shortcuts-modal').style.display = 'none';
+          });
+          document.getElementById('btn-about-visio').addEventListener('click', () => {
+            alert("Microsoft Visio Web Clone (Single-File Edition)\nDesarrollado bajo arquitectura agéntica Swarm con estándar de fidelidad al 100%.");
+          });
+        },
+
+        bindButtons() {
+          const toolButtons = [
+            { id: 'tool-pointer', tool: 'pointer' },
+            { id: 'tool-connector', tool: 'connector' },
+            { id: 'tool-pan', tool: 'pan' },
+            { id: 'tool-text', tool: 'text' }
+          ];
+
+          toolButtons.forEach(btn => {
+            const el = document.getElementById(btn.id);
+            if (el) {
+              el.addEventListener('click', () => {
+                toolButtons.forEach(b => document.getElementById(b.id).classList.remove('active'));
+                el.classList.add('active');
+                Visio.State.activeTool = btn.tool;
+
+                const scrollArea = document.getElementById('canvas-scroll-area');
+                scrollArea.className = 'canvas-scroll-area';
+                if (btn.tool === 'pan') scrollArea.classList.add('tool-pan');
+                if (btn.tool === 'connector') scrollArea.classList.add('tool-connector');
+                Visio.UI.showToast(`Herramienta activa: ${el.querySelector('span').innerText}`);
+              });
+            }
+          });
+
+          document.getElementById('qa-undo').addEventListener('click', () => Visio.History.undo());
+          document.getElementById('qa-redo').addEventListener('click', () => Visio.History.redo());
+
+          document.getElementById('btn-duplicate').addEventListener('click', () => Visio.Selection.duplicateSelected());
+          document.getElementById('btn-delete').addEventListener('click', () => Visio.Selection.deleteSelected());
+
+          const insertPairs = [
+            { id: 'btn-insert-process', type: 'process' },
+            { id: 'btn-insert-decision', type: 'decision' },
+            { id: 'btn-insert-start', type: 'terminal' },
+            { id: 'btn-insert-database', type: 'database' },
+            { id: 'btn-insert-note', type: 'note' }
+          ];
+          insertPairs.forEach(pair => {
+            const btn = document.getElementById(pair.id);
+            if (btn) {
+              btn.addEventListener('click', () => {
+                const cx = (Visio.State.pageWidth / 2) - 60;
+                const cy = (Visio.State.pageHeight / 2) - 40;
+                Visio.Stencils.createShape(pair.type, cx, cy);
+              });
+            }
+          });
+
+          document.getElementById('btn-zoom-in').addEventListener('click', () => {
+            Visio.Canvas.setZoom(Visio.State.zoom + 0.15);
+          });
+          document.getElementById('btn-zoom-out').addEventListener('click', () => {
+            Visio.Canvas.setZoom(Visio.State.zoom - 0.15);
+          });
+          document.getElementById('zoom-slider').addEventListener('input', (e) => {
+            Visio.Canvas.setZoom(parseInt(e.target.value) / 100);
+          });
+          document.getElementById('btn-zoom-fit').addEventListener('click', () => Visio.Canvas.zoomFit());
+          document.getElementById('btn-status-zoom-fit').addEventListener('click', () => Visio.Canvas.zoomFit());
+          document.getElementById('btn-zoom-100').addEventListener('click', () => Visio.Canvas.setZoom(1.0));
+
+          document.getElementById('chk-grid').addEventListener('change', (e) => {
+            Visio.State.showGrid = e.target.checked;
+            document.getElementById('visio-page-grid').style.display = e.target.checked ? 'block' : 'none';
+          });
+          document.getElementById('chk-snap').addEventListener('change', (e) => {
+            Visio.State.snapToGrid = e.target.checked;
+            Visio.UI.showToast(e.target.checked ? "Ajuste magnético activado" : "Ajuste libre");
+          });
+          document.getElementById('chk-rulers').addEventListener('change', (e) => {
+            Visio.State.showRulers = e.target.checked;
+            document.getElementById('ruler-top').style.display = e.target.checked ? 'block' : 'none';
+            document.getElementById('ruler-left').style.display = e.target.checked ? 'block' : 'none';
+            Visio.Rulers.update();
+          });
+
+          document.getElementById('shape-fill-picker').addEventListener('input', (e) => {
+            const val = e.target.value;
+            Visio.State.currentFillColor = val;
+            document.getElementById('fill-indicator-bar').style.background = val;
+            Visio.Selection.getSelectedShapes().forEach(s => s.fill = val);
+            Visio.Renderer.renderAll();
+          });
+          document.getElementById('shape-stroke-picker').addEventListener('input', (e) => {
+            const val = e.target.value;
+            Visio.State.currentStrokeColor = val;
+            document.getElementById('stroke-indicator-bar').style.background = val;
+            Visio.Selection.getSelectedShapes().forEach(s => s.stroke = val);
+            Visio.Selection.getSelectedConnectors().forEach(c => c.stroke = val);
+            Visio.Renderer.renderAll();
+          });
+          document.getElementById('stroke-width-select').addEventListener('change', (e) => {
+            const val = parseInt(e.target.value);
+            Visio.State.currentStrokeWidth = val;
+            Visio.Selection.getSelectedShapes().forEach(s => s.strokeWidth = val);
+            Visio.Selection.getSelectedConnectors().forEach(c => c.strokeWidth = val);
+            Visio.Renderer.renderAll();
+          });
+          document.getElementById('stroke-dash-select').addEventListener('change', (e) => {
+            const val = e.target.value;
+            Visio.State.currentStrokeDash = val;
+            Visio.Selection.getSelectedShapes().forEach(s => s.strokeDash = val);
+            Visio.Renderer.renderAll();
+          });
+          document.getElementById('connector-routing-type').addEventListener('change', (e) => {
+            const val = e.target.value;
+            Visio.State.currentConnectorType = val;
+            Visio.Selection.getSelectedConnectors().forEach(c => c.routing = val);
+            Visio.Renderer.renderAll();
+          });
+
+          document.getElementById('qa-save').addEventListener('click', () => Visio.IO.saveJson());
+          document.getElementById('action-save-json').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+            Visio.IO.saveJson();
+          });
+          document.getElementById('action-open-json').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+            document.getElementById('file-input-hidden').click();
+          });
+          document.getElementById('file-input-hidden').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) Visio.IO.loadJson(file);
+          });
+          document.getElementById('action-export-svg').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+            Visio.IO.exportSvg();
+          });
+          document.getElementById('action-export-png').addEventListener('click', () => {
+            document.getElementById('file-modal').style.display = 'none';
+            Visio.IO.exportPng();
+          });
+          document.getElementById('action-new-doc').addEventListener('click', () => {
+            if (confirm("¿Deseas crear un nuevo diagrama en blanco? Se descartarán los cambios no guardados.")) {
+              document.getElementById('file-modal').style.display = 'none';
+              Visio.History.pushState();
+              Visio.State.shapes = [];
+              Visio.State.connectors = [];
+              Visio.Selection.clearSelection();
+              Visio.Renderer.renderAll();
+              Visio.UI.showToast("Nuevo diagrama en blanco listo");
+            }
+          });
+
+          // Manejadores para Plantillas de Ejemplo
+          const loadSampleTemplate = (type) => {
+            document.getElementById('file-modal').style.display = 'none';
+            Visio.History.pushState();
+            const data = Visio.Samples[type];
+            if (data) {
+              Visio.State.shapes = JSON.parse(JSON.stringify(data.shapes));
+              Visio.State.connectors = JSON.parse(JSON.stringify(data.connectors));
+              Visio.Selection.clearSelection();
+              Visio.Canvas.zoomFit();
+              Visio.Renderer.renderAll();
+              Visio.UI.showToast("Plantilla cargada exitosamente");
+            }
+          };
+
+          document.getElementById('action-sample-auth').addEventListener('click', () => loadSampleTemplate('auth'));
+          document.getElementById('action-sample-cloud').addEventListener('click', () => loadSampleTemplate('cloud'));
+          document.getElementById('action-sample-proc').addEventListener('click', () => loadSampleTemplate('proc'));
+
+          document.getElementById('btn-collapse-stencils').addEventListener('click', () => {
+            const p = document.getElementById('sidebar-stencils');
+            p.classList.toggle('collapsed');
+          });
+          document.getElementById('btn-collapse-properties').addEventListener('click', () => {
+            const p = document.getElementById('sidebar-properties');
+            p.classList.toggle('collapsed');
+          });
+        },
+
+        bindPropertiesPanel() {
+          const syncShape = (prop, val) => {
+            const shapes = Visio.Selection.getSelectedShapes();
+            if (shapes.length === 0) return;
+            Visio.History.pushState();
+            shapes.forEach(s => s[prop] = val);
+            Visio.Renderer.renderAll();
+          };
+
+          document.getElementById('prop-x').addEventListener('change', (e) => syncShape('x', parseFloat(e.target.value) || 0));
+          document.getElementById('prop-y').addEventListener('change', (e) => syncShape('y', parseFloat(e.target.value) || 0));
+          document.getElementById('prop-w').addEventListener('change', (e) => syncShape('w', Math.max(20, parseFloat(e.target.value) || 20)));
+          document.getElementById('prop-h').addEventListener('change', (e) => syncShape('h', Math.max(20, parseFloat(e.target.value) || 20)));
+          document.getElementById('prop-angle').addEventListener('change', (e) => syncShape('angle', parseFloat(e.target.value) || 0));
+          document.getElementById('prop-fill-color').addEventListener('input', (e) => {
+            document.getElementById('prop-fill-preview').style.background = e.target.value;
+            syncShape('fill', e.target.value);
+          });
+          document.getElementById('prop-stroke-color').addEventListener('input', (e) => {
+            document.getElementById('prop-stroke-preview').style.background = e.target.value;
+            syncShape('stroke', e.target.value);
+          });
+          document.getElementById('prop-stroke-width').addEventListener('change', (e) => syncShape('strokeWidth', parseInt(e.target.value)));
+          document.getElementById('prop-opacity').addEventListener('input', (e) => syncShape('opacity', parseFloat(e.target.value)));
+          document.getElementById('prop-text-content').addEventListener('input', (e) => syncShape('text', e.target.value));
+          document.getElementById('prop-text-color').addEventListener('input', (e) => syncShape('fontColor', e.target.value));
+          document.getElementById('prop-text-size').addEventListener('change', (e) => syncShape('fontSize', parseInt(e.target.value) || 12));
+        },
+
+        updatePropertiesPanel() {
+          const shapes = Visio.Selection.getSelectedShapes();
+          if (shapes.length === 1) {
+            const s = shapes[0];
+            document.getElementById('prop-x').value = Math.round(s.x);
+            document.getElementById('prop-y').value = Math.round(s.y);
+            document.getElementById('prop-w').value = Math.round(s.w);
+            document.getElementById('prop-h').value = Math.round(s.h);
+            document.getElementById('prop-angle').value = Math.round(s.angle || 0);
+            document.getElementById('prop-fill-color').value = s.fill || '#ffffff';
+            document.getElementById('prop-fill-preview').style.background = s.fill || '#ffffff';
+            document.getElementById('prop-stroke-color').value = s.stroke || '#0f6cbd';
+            document.getElementById('prop-stroke-preview').style.background = s.stroke || '#0f6cbd';
+            document.getElementById('prop-stroke-width').value = s.strokeWidth || 2;
+            document.getElementById('prop-opacity').value = s.opacity || 1;
+            document.getElementById('prop-text-content').value = s.text || '';
+            document.getElementById('prop-text-color').value = s.fontColor || '#242424';
+            document.getElementById('prop-text-size').value = s.fontSize || 12;
+          }
+        },
+
+        updateUndoRedoButtons() {
+          document.getElementById('qa-undo').disabled = Visio.History.undoStack.length === 0;
+          document.getElementById('qa-redo').disabled = Visio.History.redoStack.length === 0;
+        },
+
+        updateStatusSelection() {
+          const count = Visio.State.selectedIds.length;
+          const status = document.getElementById('status-selection-info');
+          if (count === 0) status.innerText = 'Listo';
+          else if (count === 1) status.innerText = '1 elemento seleccionado';
+          else status.innerText = `${count} elementos seleccionados`;
+        },
+
+        openInlineTextEditor(shape) {
+          const editor = document.getElementById('inline-text-editor');
+          const screenX = shape.x * Visio.State.zoom + Visio.State.panX;
+          const screenY = shape.y * Visio.State.zoom + Visio.State.panY;
+          const screenW = shape.w * Visio.State.zoom;
+          const screenH = shape.h * Visio.State.zoom;
+
+          editor.style.display = 'block';
+          editor.style.left = `${screenX + 5}px`;
+          editor.style.top = `${screenY + (screenH / 4)}px`;
+          editor.style.width = `${Math.max(80, screenW - 10)}px`;
+          editor.style.height = `${Math.max(40, screenH / 2)}px`;
+          editor.style.fontSize = `${shape.fontSize * Visio.State.zoom}px`;
+          editor.value = shape.text;
+          editor.focus();
+          editor.select();
+
+          const commit = () => {
+            if (editor.style.display === 'none') return;
+            Visio.History.pushState();
+            shape.text = editor.value;
+            editor.style.display = 'none';
+            Visio.Renderer.renderAll();
+            Visio.UI.updatePropertiesPanel();
+          };
+
+          editor.onblur = commit;
+          editor.onkeydown = (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              commit();
+            } else if (e.key === 'Escape') {
+              editor.style.display = 'none';
+            }
+          };
+        },
+
+        bindKeyboardShortcuts() {
+          window.addEventListener('keydown', (e) => {
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+              e.preventDefault();
+              if (e.shiftKey) Visio.History.redo();
+              else Visio.History.undo();
+            } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
+              e.preventDefault();
+              Visio.History.redo();
+            } else if (e.key === 'Delete' || e.key === 'Backspace') {
+              e.preventDefault();
+              Visio.Selection.deleteSelected();
+            } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+              e.preventDefault();
+              Visio.Selection.duplicateSelected();
+            } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'a') {
+              e.preventDefault();
+              Visio.Selection.setSelection(Visio.State.shapes.map(s => s.id));
+            } else if (e.key === 'Escape' || e.key.toLowerCase() === 'v') {
+              document.getElementById('tool-pointer').click();
+            } else if (e.key.toLowerCase() === 'c') {
+              document.getElementById('tool-connector').click();
+            } else if (e.key.toLowerCase() === 'h') {
+              document.getElementById('tool-pan').click();
+            } else if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+              const selectedShapes = Visio.Selection.getSelectedShapes();
+              if (selectedShapes.length > 0) {
+                e.preventDefault();
+                const delta = e.shiftKey ? 10 : 2;
+                Visio.History.pushState();
+                selectedShapes.forEach(s => {
+                  if (e.key === 'ArrowUp') s.y -= delta;
+                  if (e.key === 'ArrowDown') s.y += delta;
+                  if (e.key === 'ArrowLeft') s.x -= delta;
+                  if (e.key === 'ArrowRight') s.x += delta;
+                });
+                Visio.Renderer.renderAll();
+              }
+            }
+          });
+        },
+
+        bindStencilDrag() {
+          const items = document.querySelectorAll('.stencil-item');
+          items.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+              e.dataTransfer.setData('text/plain', item.getAttribute('data-shape'));
+            });
+            item.addEventListener('click', () => {
+              const cx = (Visio.State.pageWidth / 2) - 60;
+              const cy = (Visio.State.pageHeight / 2) - 40;
+              Visio.Stencils.createShape(item.getAttribute('data-shape'), cx, cy);
+            });
+          });
+
+          document.getElementById('stencil-search-input').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            document.querySelectorAll('.stencil-item').forEach(item => {
+              const text = item.innerText.toLowerCase();
+              item.style.display = text.includes(q) ? 'flex' : 'none';
+            });
+          });
+        },
+
+        showToast(msg) {
+          const toast = document.getElementById('toast-message');
+          toast.innerText = msg;
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+      },
+
+      // Persistencia, Serialización y Exportación
+      IO: {
+        saveJson() {
+          const data = {
+            version: '1.0.0',
+            appName: 'Microsoft Visio Clone Web',
+            timestamp: new Date().toISOString(),
+            canvas: {
+              pageWidth: Visio.State.pageWidth,
+              pageHeight: Visio.State.pageHeight
+            },
+            shapes: Visio.State.shapes,
+            connectors: Visio.State.connectors
+          };
+
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'Diagrama1.visio.json';
+          a.click();
+          URL.revokeObjectURL(url);
+          Visio.UI.showToast("Proyecto guardado como .visio.json");
+        },
+
+        loadJson(file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            try {
+              const data = JSON.parse(e.target.result);
+              if (data.shapes && Array.isArray(data.shapes)) {
+                Visio.History.pushState();
+                Visio.State.shapes = data.shapes;
+                Visio.State.connectors = data.connectors || [];
+                Visio.Selection.clearSelection();
+                Visio.Renderer.renderAll();
+                Visio.UI.showToast("Diagrama cargado exitosamente");
+              } else {
+                alert("El archivo no contiene un formato de diagrama válido.");
+              }
+            } catch (err) {
+              alert("Error al leer el archivo JSON: " + err.message);
+            }
+          };
+          reader.readAsText(file);
+        },
+
+        exportSvg() {
+          const svgEl = document.getElementById('visio-svg-canvas');
+          const clone = svgEl.cloneNode(true);
+
+          const overlay = clone.querySelector('#layer-overlay');
+          if (overlay) overlay.remove();
+
+          clone.setAttribute('viewBox', `0 0 ${Visio.State.pageWidth} ${Visio.State.pageHeight}`);
+          clone.setAttribute('width', Visio.State.pageWidth);
+          clone.setAttribute('height', Visio.State.pageHeight);
+          clone.querySelector('#viewport-transform-group').setAttribute('transform', '');
+
+          const svgData = new XMLSerializer().serializeToString(clone);
+          const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'Diagrama1_Visio.svg';
+          a.click();
+          URL.revokeObjectURL(url);
+          Visio.UI.showToast("Exportado como SVG vectorial");
+        },
+
+        exportPng() {
+          const svgEl = document.getElementById('visio-svg-canvas');
+          const clone = svgEl.cloneNode(true);
+          const overlay = clone.querySelector('#layer-overlay');
+          if (overlay) overlay.remove();
+
+          clone.setAttribute('viewBox', `0 0 ${Visio.State.pageWidth} ${Visio.State.pageHeight}`);
+          clone.setAttribute('width', Visio.State.pageWidth);
+          clone.setAttribute('height', Visio.State.pageHeight);
+          clone.querySelector('#viewport-transform-group').setAttribute('transform', '');
+
+          const svgString = new XMLSerializer().serializeToString(clone);
+          const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+          const URLObj = window.URL || window.webkitURL || window;
+          const blobURL = URLObj.createObjectURL(svgBlob);
+
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.getElementById('export-png-canvas');
+            const scale = 2;
+            canvas.width = Visio.State.pageWidth * scale;
+            canvas.height = Visio.State.pageHeight * scale;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(scale, scale);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, Visio.State.pageWidth, Visio.State.pageHeight);
+            ctx.drawImage(img, 0, 0);
+
+            const pngUrl = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = pngUrl;
+            a.download = 'Diagrama1_Visio.png';
+            a.click();
+            URLObj.revokeObjectURL(blobURL);
+            Visio.UI.showToast("Exportado como imagen PNG de alta resolución");
+          };
+          img.src = blobURL;
+        }
+      },
+
+      // Utilidades
+      Utils: {
+        escapeXml(str) {
+          return (str || '').replace(/[<>&'"]/g, (c) => {
+            switch (c) {
+              case '<': return '&lt;';
+              case '>': return '&gt;';
+              case '&': return '&amp;';
+              case '\'': return '&apos;';
+              case '"': return '&quot;';
+            }
+          });
+        }
+      },
+
+      // Plantillas de Ejemplo Embebidas
+      Samples: {
+        auth: {
+          shapes: [
+            { id: "node_start", type: "terminal", x: 280, y: 80, w: 150, h: 55, angle: 0, fill: "#ebf3fc", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Inicio de Sesión", fontColor: "#0f6cbd", fontSize: 13, fontFamily: "Segoe UI", isBold: true },
+            { id: "node_input", type: "data", x: 270, y: 180, w: 170, h: 65, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Ingreso de Credenciales", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "node_check_db", type: "process", x: 275, y: 290, w: 160, h: 70, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Consultar Hash en BD", fontColor: "#242424", fontSize: 12, fontFamily: "Segoe UI", isBold: false },
+            { id: "node_db", type: "database", x: 560, y: 285, w: 130, h: 80, angle: 0, fill: "#f0f8ff", stroke: "#0078d4", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "BD Usuarios", fontColor: "#004578", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "node_decide_valid", type: "decision", x: 270, y: 410, w: 170, h: 90, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "¿Credenciales Válidas?", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "node_decide_mfa", type: "decision", x: 270, y: 550, w: 170, h: 90, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "¿Tiene MFA?", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "node_mfa_prompt", type: "process", x: 550, y: 560, w: 150, h: 70, angle: 0, fill: "#ffffff", stroke: "#107c41", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Solicitar Token OTP", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "node_fail_auth", type: "terminal", x: 60, y: 427, w: 140, h: 55, angle: 0, fill: "#fde7e9", stroke: "#d13438", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Acceso Denegado", fontColor: "#a80000", fontSize: 12, fontFamily: "Segoe UI", isBold: true },
+            { id: "node_success_jwt", type: "process", x: 275, y: 690, w: 160, h: 70, angle: 0, fill: "#e6f2ea", stroke: "#107c41", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Generar JWT y Sesión", fontColor: "#0b5a2b", fontSize: 12, fontFamily: "Segoe UI", isBold: true },
+            { id: "node_end", type: "terminal", x: 285, y: 800, w: 140, h: 55, angle: 0, fill: "#ebf3fc", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Entrada a Dashboard", fontColor: "#0f6cbd", fontSize: 12, fontFamily: "Segoe UI", isBold: true }
+          ],
+          connectors: [
+            { id: "c1", fromId: "node_start", fromPort: "south", toId: "node_input", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" },
+            { id: "c2", fromId: "node_input", fromPort: "south", toId: "node_check_db", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" },
+            { id: "c3", fromId: "node_check_db", fromPort: "east", toId: "node_db", toPort: "west", routing: "orthogonal", arrowType: "both-arrow", stroke: "#0078d4", strokeWidth: 2, text: "SELECT" },
+            { id: "c4", fromId: "node_check_db", fromPort: "south", toId: "node_decide_valid", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" },
+            { id: "c5", fromId: "node_decide_valid", fromPort: "west", toId: "node_fail_auth", toPort: "east", routing: "orthogonal", arrowType: "end-arrow", stroke: "#d13438", strokeWidth: 2, text: "No" },
+            { id: "c6", fromId: "node_decide_valid", fromPort: "south", toId: "node_decide_mfa", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#107c41", strokeWidth: 2, text: "Sí" },
+            { id: "c7", fromId: "node_decide_mfa", fromPort: "east", toId: "node_mfa_prompt", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "Sí" },
+            { id: "c8", fromId: "node_decide_mfa", fromPort: "south", toId: "node_success_jwt", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#107c41", strokeWidth: 2, text: "No" },
+            { id: "c9", fromId: "node_mfa_prompt", fromPort: "south", toId: "node_success_jwt", toPort: "east", routing: "orthogonal", arrowType: "end-arrow", stroke: "#107c41", strokeWidth: 2, text: "OK" },
+            { id: "c10", fromId: "node_success_jwt", fromPort: "south", toId: "node_end", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" }
+          ]
+        },
+        cloud: {
+          shapes: [
+            { id: "arch_client", type: "actor", x: 60, y: 280, w: 70, h: 100, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Cliente Web", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "arch_gateway", type: "process", x: 220, y: 290, w: 150, h: 80, angle: 0, fill: "#ebf3fc", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "API Gateway\n(Rate Limit & Auth)", fontColor: "#0f6cbd", fontSize: 12, fontFamily: "Segoe UI", isBold: true },
+            { id: "arch_srv_auth", type: "process", x: 470, y: 140, w: 160, h: 70, angle: 0, fill: "#ffffff", stroke: "#008272", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Microservicio Auth", fontColor: "#004b40", fontSize: 12, fontFamily: "Segoe UI", isBold: false },
+            { id: "arch_srv_orders", type: "process", x: 470, y: 295, w: 160, h: 70, angle: 0, fill: "#ffffff", stroke: "#008272", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Microservicio Pedidos", fontColor: "#004b40", fontSize: 12, fontFamily: "Segoe UI", isBold: false },
+            { id: "arch_srv_pay", type: "process", x: 470, y: 450, w: 160, h: 70, angle: 0, fill: "#ffffff", stroke: "#008272", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Microservicio Pagos", fontColor: "#004b40", fontSize: 12, fontFamily: "Segoe UI", isBold: false },
+            { id: "arch_db_users", type: "database", x: 730, y: 135, w: 120, h: 80, angle: 0, fill: "#f0f8ff", stroke: "#0078d4", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "BD Usuarios", fontColor: "#004578", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "arch_db_orders", type: "database", x: 730, y: 290, w: 120, h: 80, angle: 0, fill: "#f0f8ff", stroke: "#0078d4", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "BD Pedidos", fontColor: "#004578", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "arch_cloud_payment", type: "cloud", x: 720, y: 445, w: 140, h: 85, angle: 0, fill: "#fdf3eb", stroke: "#d83b01", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Pasarela Externa\n(Stripe / PayPal)", fontColor: "#a80000", fontSize: 11, fontFamily: "Segoe UI", isBold: true }
+          ],
+          connectors: [
+            { id: "ac1", fromId: "arch_client", fromPort: "east", toId: "arch_gateway", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "HTTPS" },
+            { id: "ac2", fromId: "arch_gateway", fromPort: "east", toId: "arch_srv_auth", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#008272", strokeWidth: 2, text: "/auth" },
+            { id: "ac3", fromId: "arch_gateway", fromPort: "east", toId: "arch_srv_orders", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#008272", strokeWidth: 2, text: "/orders" },
+            { id: "ac4", fromId: "arch_gateway", fromPort: "east", toId: "arch_srv_pay", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#008272", strokeWidth: 2, text: "/payments" },
+            { id: "ac5", fromId: "arch_srv_auth", fromPort: "east", toId: "arch_db_users", toPort: "west", routing: "orthogonal", arrowType: "both-arrow", stroke: "#0078d4", strokeWidth: 2, text: "" },
+            { id: "ac6", fromId: "arch_srv_orders", fromPort: "east", toId: "arch_db_orders", toPort: "west", routing: "orthogonal", arrowType: "both-arrow", stroke: "#0078d4", strokeWidth: 2, text: "" },
+            { id: "ac7", fromId: "arch_srv_pay", fromPort: "east", toId: "arch_cloud_payment", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#d83b01", strokeWidth: 2, text: "REST API" }
+          ]
+        },
+        proc: {
+          shapes: [
+            { id: "proc_solicitante", type: "actor", x: 80, y: 180, w: 70, h: 90, angle: 0, fill: "#ffffff", stroke: "#742774", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Solicitante", fontColor: "#333333", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "proc_doc_solicitud", type: "document", x: 230, y: 180, w: 140, h: 85, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Orden de Compra\n(Requisición)", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "proc_decide_monto", type: "decision", x: 450, y: 170, w: 160, h: 95, angle: 0, fill: "#ffffff", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "¿Monto > $5.000 USD?", fontColor: "#242424", fontSize: 11, fontFamily: "Segoe UI", isBold: false },
+            { id: "proc_aprob_gerente", type: "process", x: 450, y: 340, w: 160, h: 70, angle: 0, fill: "#fff4ce", stroke: "#c9a834", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Aprobación de Gerencia\nFinanciera", fontColor: "#444444", fontSize: 11, fontFamily: "Segoe UI", isBold: true },
+            { id: "proc_emision_po", type: "process", x: 700, y: 182, w: 160, h: 70, angle: 0, fill: "#e6f2ea", stroke: "#107c41", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Generar PO y Enviar\na Proveedor", fontColor: "#0b5a2b", fontSize: 12, fontFamily: "Segoe UI", isBold: true },
+            { id: "proc_fin_exito", type: "terminal", x: 940, y: 190, w: 140, h: 55, angle: 0, fill: "#ebf3fc", stroke: "#0f6cbd", strokeWidth: 2, strokeDash: "solid", opacity: 1, text: "Pedido Procesado", fontColor: "#0f6cbd", fontSize: 12, fontFamily: "Segoe UI", isBold: true }
+          ],
+          connectors: [
+            { id: "pc1", fromId: "proc_solicitante", fromPort: "east", toId: "proc_doc_solicitud", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#742774", strokeWidth: 2, text: "Crea" },
+            { id: "pc2", fromId: "proc_doc_solicitud", fromPort: "east", toId: "proc_decide_monto", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" },
+            { id: "pc3", fromId: "proc_decide_monto", fromPort: "east", toId: "proc_emision_po", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#107c41", strokeWidth: 2, text: "No" },
+            { id: "pc4", fromId: "proc_decide_monto", fromPort: "south", toId: "proc_aprob_gerente", toPort: "north", routing: "orthogonal", arrowType: "end-arrow", stroke: "#c9a834", strokeWidth: 2, text: "Sí" },
+            { id: "pc5", fromId: "proc_aprob_gerente", fromPort: "east", toId: "proc_emision_po", toPort: "south", routing: "orthogonal", arrowType: "end-arrow", stroke: "#107c41", strokeWidth: 2, text: "Aprobado" },
+            { id: "pc6", fromId: "proc_emision_po", fromPort: "east", toId: "proc_fin_exito", toPort: "west", routing: "orthogonal", arrowType: "end-arrow", stroke: "#0f6cbd", strokeWidth: 2, text: "" }
+          ]
+        }
+      },
+
+      // Inicialización General
+      init() {
+        this.Canvas.init();
+        this.UI.init();
+        this.loadInitialDemo();
+        this.Renderer.renderAll();
+      },
+
+      loadInitialDemo() {
+        const s1 = {
+          id: 'shape_demo_1',
+          type: 'terminal',
+          x: 250, y: 120, w: 140, h: 55,
+          angle: 0, fill: '#ffffff', stroke: '#0f6cbd', strokeWidth: 2, strokeDash: 'solid', opacity: 1,
+          text: 'Inicio del Proceso', fontColor: '#242424', fontSize: 12, fontFamily: 'Segoe UI', isBold: true
+        };
+        const s2 = {
+          id: 'shape_demo_2',
+          type: 'process',
+          x: 250, y: 230, w: 140, h: 70,
+          angle: 0, fill: '#ffffff', stroke: '#0f6cbd', strokeWidth: 2, strokeDash: 'solid', opacity: 1,
+          text: 'Validar Datos de Entrada', fontColor: '#242424', fontSize: 12, fontFamily: 'Segoe UI', isBold: false
+        };
+        const s3 = {
+          id: 'shape_demo_3',
+          type: 'decision',
+          x: 245, y: 360, w: 150, h: 85,
+          angle: 0, fill: '#ffffff', stroke: '#0f6cbd', strokeWidth: 2, strokeDash: 'solid', opacity: 1,
+          text: '¿Es Válido?', fontColor: '#242424', fontSize: 12, fontFamily: 'Segoe UI', isBold: false
+        };
+        const s4 = {
+          id: 'shape_demo_4',
+          type: 'database',
+          x: 520, y: 362, w: 140, h: 80,
+          angle: 0, fill: '#ffffff', stroke: '#0f6cbd', strokeWidth: 2, strokeDash: 'solid', opacity: 1,
+          text: 'Almacenar Registro', fontColor: '#242424', fontSize: 12, fontFamily: 'Segoe UI', isBold: false
+        };
+        const s5 = {
+          id: 'shape_demo_5',
+          type: 'terminal',
+          x: 250, y: 510, w: 140, h: 55,
+          angle: 0, fill: '#ffffff', stroke: '#0f6cbd', strokeWidth: 2, strokeDash: 'solid', opacity: 1,
+          text: 'Fin / Reportar Error', fontColor: '#242424', fontSize: 12, fontFamily: 'Segoe UI', isBold: true
+        };
+
+        const c1 = {
+          id: 'conn_demo_1',
+          fromId: 'shape_demo_1', fromPort: 'south',
+          toId: 'shape_demo_2', toPort: 'north',
+          routing: 'orthogonal', arrowType: 'end-arrow', stroke: '#0f6cbd', strokeWidth: 2, text: ''
+        };
+        const c2 = {
+          id: 'conn_demo_2',
+          fromId: 'shape_demo_2', fromPort: 'south',
+          toId: 'shape_demo_3', toPort: 'north',
+          routing: 'orthogonal', arrowType: 'end-arrow', stroke: '#0f6cbd', strokeWidth: 2, text: ''
+        };
+        const c3 = {
+          id: 'conn_demo_3',
+          fromId: 'shape_demo_3', fromPort: 'east',
+          toId: 'shape_demo_4', toPort: 'west',
+          routing: 'orthogonal', arrowType: 'end-arrow', stroke: '#0f6cbd', strokeWidth: 2, text: 'Sí'
+        };
+        const c4 = {
+          id: 'conn_demo_4',
+          fromId: 'shape_demo_3', fromPort: 'south',
+          toId: 'shape_demo_5', toPort: 'north',
+          routing: 'orthogonal', arrowType: 'end-arrow', stroke: '#0f6cbd', strokeWidth: 2, text: 'No'
+        };
+
+        Visio.State.shapes = [s1, s2, s3, s4, s5];
+        Visio.State.connectors = [c1, c2, c3, c4];
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      Visio.init();
+    });
+  </script>
+</body>
+</html>
