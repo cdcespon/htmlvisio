@@ -3177,17 +3177,37 @@
               pageWidth: Visio.State.pageWidth,
               pageHeight: Visio.State.pageHeight
             },
+      // Persistencia, Serialización y Exportación
+      IO: {
+        triggerDownload(blob, filename) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            if (a.parentNode) a.parentNode.removeChild(a);
+            URL.revokeObjectURL(url);
+          }, 2000);
+        },
+
+        saveJson() {
+          const data = {
+            version: '1.0.0',
+            appName: 'Microsoft Visio Clone Web',
+            timestamp: new Date().toISOString(),
+            canvas: {
+              pageWidth: Visio.State.pageWidth,
+              pageHeight: Visio.State.pageHeight
+            },
             shapes: Visio.State.shapes,
             connectors: Visio.State.connectors
           };
 
-          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'Diagrama1.visio.json';
-          a.click();
-          URL.revokeObjectURL(url);
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+          this.triggerDownload(blob, 'Diagrama1.visio.json');
           Visio.UI.showToast("Proyecto guardado como .visio.json");
         },
 
@@ -3201,6 +3221,7 @@
                 Visio.State.shapes = data.shapes;
                 Visio.State.connectors = data.connectors || [];
                 Visio.Selection.clearSelection();
+                Visio.Canvas.zoomFit();
                 Visio.Renderer.renderAll();
                 Visio.UI.showToast("Diagrama cargado exitosamente");
               } else {
@@ -3217,35 +3238,116 @@
           const svgEl = document.getElementById('visio-svg-canvas');
           const clone = svgEl.cloneNode(true);
 
+          // 1. Declarar atributos y espacios de nombres obligatorios para SVG estándar
+          clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+          clone.setAttribute('version', '1.1');
+
+          // 2. Limpiar elementos interactivos y controles
           const overlay = clone.querySelector('#layer-overlay');
           if (overlay) overlay.remove();
 
-          clone.setAttribute('viewBox', `0 0 ${Visio.State.pageWidth} ${Visio.State.pageHeight}`);
-          clone.setAttribute('width', Visio.State.pageWidth);
-          clone.setAttribute('height', Visio.State.pageHeight);
-          clone.querySelector('#viewport-transform-group').setAttribute('transform', '');
+          clone.querySelectorAll('.connection-port, .visio-connector-hitbox').forEach(el => el.remove());
 
-          const svgData = new XMLSerializer().serializeToString(clone);
-          const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'Diagrama1_Visio.svg';
-          a.click();
-          URL.revokeObjectURL(url);
+          // 3. Embeber estilos CSS para fuentes y trazos en visores vectoriales
+          let defs = clone.querySelector('defs');
+          if (!defs) {
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            clone.insertBefore(defs, clone.firstChild);
+          }
+          const styleEl = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+          styleEl.textContent = `
+            text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+            .visio-connector-path { fill: none !important; }
+            .shape-geom { stroke-linejoin: round; }
+          `;
+          defs.appendChild(styleEl);
+
+          // 4. Calcular Bounding Box elegante con margen de 40px
+          let viewBoxX = 0, viewBoxY = 0, viewBoxW = Visio.State.pageWidth, viewBoxH = Visio.State.pageHeight;
+          if (Visio.State.shapes.length > 0) {
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            Visio.State.shapes.forEach(s => {
+              minX = Math.min(minX, s.x);
+              minY = Math.min(minY, s.y);
+              maxX = Math.max(maxX, s.x + s.w);
+              maxY = Math.max(maxY, s.y + s.h);
+            });
+            const pad = 40;
+            viewBoxX = Math.max(0, Math.floor(minX - pad));
+            viewBoxY = Math.max(0, Math.floor(minY - pad));
+            viewBoxW = Math.ceil((maxX - minX) + pad * 2);
+            viewBoxH = Math.ceil((maxY - minY) + pad * 2);
+          }
+
+          clone.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${viewBoxW} ${viewBoxH}`);
+          clone.setAttribute('width', viewBoxW);
+          clone.setAttribute('height', viewBoxH);
+
+          const vGroup = clone.querySelector('#viewport-transform-group');
+          if (vGroup) vGroup.setAttribute('transform', '');
+
+          const bgSheet = clone.querySelector('#page-background-group');
+          if (bgSheet) {
+            bgSheet.innerHTML = `<rect x="${viewBoxX}" y="${viewBoxY}" width="${viewBoxW}" height="${viewBoxH}" fill="#ffffff"/>`;
+          }
+
+          const svgString = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n' + new XMLSerializer().serializeToString(clone);
+          const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+          this.triggerDownload(blob, 'Diagrama1_Visio.svg');
           Visio.UI.showToast("Exportado como SVG vectorial");
         },
 
         exportPng() {
           const svgEl = document.getElementById('visio-svg-canvas');
           const clone = svgEl.cloneNode(true);
+
+          clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+
           const overlay = clone.querySelector('#layer-overlay');
           if (overlay) overlay.remove();
+          clone.querySelectorAll('.connection-port, .visio-connector-hitbox').forEach(el => el.remove());
 
-          clone.setAttribute('viewBox', `0 0 ${Visio.State.pageWidth} ${Visio.State.pageHeight}`);
-          clone.setAttribute('width', Visio.State.pageWidth);
-          clone.setAttribute('height', Visio.State.pageHeight);
-          clone.querySelector('#viewport-transform-group').setAttribute('transform', '');
+          let defs = clone.querySelector('defs');
+          if (!defs) {
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            clone.insertBefore(defs, clone.firstChild);
+          }
+          const styleEl = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+          styleEl.textContent = `
+            text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; }
+            .visio-connector-path { fill: none !important; }
+          `;
+          defs.appendChild(styleEl);
+
+          let viewBoxX = 0, viewBoxY = 0, viewBoxW = Visio.State.pageWidth, viewBoxH = Visio.State.pageHeight;
+          if (Visio.State.shapes.length > 0) {
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            Visio.State.shapes.forEach(s => {
+              minX = Math.min(minX, s.x);
+              minY = Math.min(minY, s.y);
+              maxX = Math.max(maxX, s.x + s.w);
+              maxY = Math.max(maxY, s.y + s.h);
+            });
+            const pad = 40;
+            viewBoxX = Math.max(0, Math.floor(minX - pad));
+            viewBoxY = Math.max(0, Math.floor(minY - pad));
+            viewBoxW = Math.ceil((maxX - minX) + pad * 2);
+            viewBoxH = Math.ceil((maxY - minY) + pad * 2);
+          }
+
+          clone.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${viewBoxW} ${viewBoxH}`);
+          clone.setAttribute('width', viewBoxW);
+          clone.setAttribute('height', viewBoxH);
+
+          const vGroup = clone.querySelector('#viewport-transform-group');
+          if (vGroup) vGroup.setAttribute('transform', '');
+
+          const bgSheet = clone.querySelector('#page-background-group');
+          if (bgSheet) {
+            bgSheet.innerHTML = `<rect x="${viewBoxX}" y="${viewBoxY}" width="${viewBoxW}" height="${viewBoxH}" fill="#ffffff"/>`;
+          }
 
           const svgString = new XMLSerializer().serializeToString(clone);
           const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
@@ -3256,21 +3358,21 @@
           img.onload = () => {
             const canvas = document.getElementById('export-png-canvas');
             const scale = 2;
-            canvas.width = Visio.State.pageWidth * scale;
-            canvas.height = Visio.State.pageHeight * scale;
+            canvas.width = viewBoxW * scale;
+            canvas.height = viewBoxH * scale;
             const ctx = canvas.getContext('2d');
             ctx.scale(scale, scale);
             ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, Visio.State.pageWidth, Visio.State.pageHeight);
-            ctx.drawImage(img, 0, 0);
+            ctx.fillRect(0, 0, viewBoxW, viewBoxH);
+            ctx.drawImage(img, 0, 0, viewBoxW, viewBoxH);
 
-            const pngUrl = canvas.toDataURL('image/png');
-            const a = document.createElement('a');
-            a.href = pngUrl;
-            a.download = 'Diagrama1_Visio.png';
-            a.click();
-            URLObj.revokeObjectURL(blobURL);
-            Visio.UI.showToast("Exportado como imagen PNG de alta resolución");
+            canvas.toBlob((blob) => {
+              if (blob) {
+                Visio.IO.triggerDownload(blob, 'Diagrama1_Visio.png');
+                Visio.UI.showToast("Exportado como imagen PNG de alta resolución");
+              }
+              URLObj.revokeObjectURL(blobURL);
+            }, 'image/png');
           };
           img.src = blobURL;
         }
