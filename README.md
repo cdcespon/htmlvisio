@@ -1,18 +1,18 @@
-# HtmlVisio — Microsoft Visio Web Clone (Single-File)
+# HtmlVisio — Visio Web Clone (Single-File)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Vanilla)-success.svg)]()
 [![Single File](https://img.shields.io/badge/Architecture-Single--File%20(HTML%2FCSS%2FJS)-orange.svg)]()
 [![Offline Ready](https://img.shields.io/badge/Offline-100%25%20Ready-brightgreen.svg)]()
 
-> **HtmlVisio** es un clon ligero, de alta fidelidad y completamente autónomo de **Microsoft Visio**, diseñado en un único archivo ejecutable (`HtmlVisio.html`) con HTML5, CSS3 y JavaScript moderno nativo. No requiere instalación, conexión a internet, NodeJS ni dependencias externas.
+> **HtmlVisio** es un clon ligero, de alta fidelidad y completamente autónomo del entorno **Visio**, diseñado en un único archivo ejecutable (`HtmlVisio.html`) con HTML5, CSS3 y JavaScript moderno nativo. No requiere instalación, conexión a internet, NodeJS ni dependencias externas.
 
 ---
 
 ## 📸 Capturas de Pantalla
 
 ### 1. Espacio de Trabajo Principal (Fluent Ribbon & Canvas SVG)
-Interfaz idéntica a Microsoft Visio con cinta de opciones Ribbon, paleta de stencils a la izquierda, reglas métricas dinámicas, cuadrícula y diagrama interactivo:
+Interfaz profesional estilo Visio con cinta de opciones Ribbon, paleta de stencils a la izquierda, reglas métricas dinámicas, cuadrícula y diagrama interactivo:
 
 ![Espacio de Trabajo Principal](assets/images/visio_initial_load.png)
 
