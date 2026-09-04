@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "appName": "Microsoft Visio Clone Web",
+  "title": "Infraestructura de Red TI y Ciberseguridad",
+  "timestamp": "2026-09-04T18:40:00.000Z",
+  "canvas": {
+    "pageWidth": 1200,
+    "pageHeight": 900
+  },
+  "shapes": [
+    { "id": "net_cloud", "type": "cloud", "x": 60, "y": 280, "w": 130, "h": 80, "angle": 0, "fill": "#fdf3eb", "stroke": "#d83b01", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Internet / WAN", "fontColor": "#a80000", "fontSize": 12, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_firewall_ext", "type": "firewall", "x": 240, "y": 285, "w": 100, "h": 70, "angle": 0, "fill": "#fdf3eb", "stroke": "#d83b01", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Firewall\nPerimetral", "fontColor": "#a80000", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_router", "type": "router", "x": 390, "y": 290, "w": 90, "h": 60, "angle": 0, "fill": "#ebf3fc", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Router Core", "fontColor": "#0f6cbd", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_server_dmz", "type": "server", "x": 550, "y": 130, "w": 110, "h": 80, "angle": 0, "fill": "#ffffff", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Servidor Web\n(DMZ)", "fontColor": "#242424", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_server_app", "type": "server", "x": 550, "y": 280, "w": 110, "h": 80, "angle": 0, "fill": "#ffffff", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Servidor Apps\n(Backend)", "fontColor": "#242424", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_db", "type": "database", "x": 730, "y": 280, "w": 110, "h": 80, "angle": 0, "fill": "#f0f8ff", "stroke": "#0078d4", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Cluster BD\n(Enterprise)", "fontColor": "#004578", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_pc1", "type": "workstation", "x": 550, "y": 450, "w": 95, "h": 75, "angle": 0, "fill": "#ffffff", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "PC Soporte IT", "fontColor": "#242424", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": false },
+    { "id": "net_laptop", "type": "laptop", "x": 730, "y": 455, "w": 95, "h": 65, "angle": 0, "fill": "#ffffff", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Laptop Remota\n(VPN SSL)", "fontColor": "#242424", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": false },
+    { "id": "net_note", "type": "note", "x": 370, "y": 105, "w": 130, "h": 85, "angle": 0, "fill": "#fff9d6", "stroke": "#c9a834", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Zona DMZ Aislada\nInspección SSL\nReglas puerto 443", "fontColor": "#444444", "fontSize": 10, "fontFamily": "Segoe UI", "isBold": false },
+    { "id": "net_admin", "type": "actor", "x": 900, "y": 435, "w": 70, "h": 95, "angle": 0, "fill": "#ffffff", "stroke": "#0f6cbd", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Admin Sys", "fontColor": "#242424", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true },
+    { "id": "net_balloon", "type": "speech_balloon", "x": 875, "y": 275, "w": 130, "h": 80, "angle": 0, "fill": "#e6f2ea", "stroke": "#107c41", "strokeWidth": 2, "strokeDash": "solid", "opacity": 1, "text": "Monitoreo 24/7\nSin Alertas", "fontColor": "#0b5a2b", "fontSize": 11, "fontFamily": "Segoe UI", "isBold": true }
+  ],
+  "connectors": [
+    { "id": "cn1", "fromId": "net_cloud", "fromPort": "east", "toId": "net_firewall_ext", "toPort": "west", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#d83b01", "strokeWidth": 2, "text": "WAN" },
+    { "id": "cn2", "fromId": "net_firewall_ext", "fromPort": "east", "toId": "net_router", "toPort": "west", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "Limpio" },
+    { "id": "cn3", "fromId": "net_router", "fromPort": "north", "toId": "net_server_dmz", "toPort": "west", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "HTTPS" },
+    { "id": "cn4", "fromId": "net_router", "fromPort": "east", "toId": "net_server_app", "toPort": "west", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "LAN" },
+    { "id": "cn5", "fromId": "net_server_app", "fromPort": "east", "toId": "net_db", "toPort": "west", "routing": "orthogonal", "arrowType": "both-arrow", "stroke": "#0078d4", "strokeWidth": 2, "text": "SQL" },
+    { "id": "cn6", "fromId": "net_router", "fromPort": "south", "toId": "net_pc1", "toPort": "west", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "VLAN 10" },
+    { "id": "cn7", "fromId": "net_admin", "fromPort": "west", "toId": "net_laptop", "toPort": "east", "routing": "orthogonal", "arrowType": "end-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "SSH" },
+    { "id": "cn8", "fromId": "net_laptop", "fromPort": "west", "toId": "net_pc1", "toPort": "east", "routing": "orthogonal", "arrowType": "both-arrow", "stroke": "#0f6cbd", "strokeWidth": 2, "text": "VPN" }
+  ]
+}

@@ -86,13 +86,17 @@ Guardado y carga en formato nativo `.visio.json`, plantillas precargadas con un 
 
 ## 📂 Archivos y Plantillas de Prueba Incluidas
 
-El repositorio incluye ejemplos listos para probar en la carpeta [`samples/`](samples/):
+El repositorio incluye 5 diagramas profesionales listos para probar en la carpeta [`samples/`](samples/) o accesibles con 1 solo clic desde el menú **Archivo**:
 
 1. **[diagrama_flujo_autenticacion.visio.json](samples/diagrama_flujo_autenticacion.visio.json):** Flujo de inicio de sesión con validación de credenciales en base de datos, bifurcación condicional, paso MFA y estados terminales de acceso.
 2. **[arquitectura_microservicios_cloud.visio.json](samples/arquitectura_microservicios_cloud.visio.json):** Diagrama de arquitectura con actor cliente, API Gateway, microservicios, bases de datos y nube externa de pagos.
 3. **[proceso_aprobacion_compras.visio.json](samples/proceso_aprobacion_compras.visio.json):** Flujo de negocio BPM con órdenes de compra, validación de montos y aprobación gerencial.
+4. **[red_ciberseguridad_ti.visio.json](samples/red_ciberseguridad_ti.visio.json):** Topología de red empresarial y ciberseguridad con Servidores Rack (slots y LEDs), Router Core, Firewall perimetral, Estaciones de Trabajo PC, Laptops remotas con VPN, Administrador de Sistemas y Bocadillo de monitoreo en tiempo real.
+   ![Red TI y Ciberseguridad](assets/images/sample_red_ciberseguridad.png)
+5. **[proceso_industrial_bpm_extendido.visio.json](samples/proceso_industrial_bpm_extendido.visio.json):** Proceso de fabricación industrial que implementa Subproceso CNC, Preparación de utillajes, Retardo térmico en cola (forma D), Operación manual con inspector, Decisión con derivación fuera de página (Planta 2), Conector de página A, Certificados de calidad ISO multidocumento y Estrella de conformidad.
+   ![Proceso Industrial BPM](assets/images/sample_proceso_industrial.png)
 
-> **💡 Consejo:** Puedes cargarlos desde el menú **Archivo > Abrir Archivo (.visio.json)** o hacer clic directamente en los botones de **Plantillas de Ejemplo** dentro del menú Archivo.
+> **💡 Consejo:** Puedes cargarlos desde el menú **Archivo > Abrir Archivo (.visio.json)** o hacer clic directamente en los botones de **Plantillas de Ejemplo (1 Clic)** dentro del menú Archivo.
 
 ---
 
