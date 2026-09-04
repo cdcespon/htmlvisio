@@ -3168,29 +3168,16 @@
 
       // Persistencia, Serialización y Exportación
       IO: {
-        saveJson() {
-          const data = {
-            version: '1.0.0',
-            appName: 'Microsoft Visio Clone Web',
-            timestamp: new Date().toISOString(),
-            canvas: {
-              pageWidth: Visio.State.pageWidth,
-              pageHeight: Visio.State.pageHeight
-            },
-      // Persistencia, Serialización y Exportación
-      IO: {
-        triggerDownload(blob, filename) {
-          const url = URL.createObjectURL(blob);
+        triggerDownload(dataUrl, filename) {
           const a = document.createElement('a');
-          a.href = url;
+          a.href = dataUrl;
           a.download = filename;
           a.style.display = 'none';
           document.body.appendChild(a);
           a.click();
           setTimeout(() => {
             if (a.parentNode) a.parentNode.removeChild(a);
-            URL.revokeObjectURL(url);
-          }, 2000);
+          }, 1000);
         },
 
         saveJson() {
@@ -3206,8 +3193,9 @@
             connectors: Visio.State.connectors
           };
 
-          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
-          this.triggerDownload(blob, 'Diagrama1.visio.json');
+          const jsonString = JSON.stringify(data, null, 2);
+          const dataUrl = 'data:application/json;charset=utf-8,' + encodeURIComponent(jsonString);
+          this.triggerDownload(dataUrl, 'Diagrama1.visio.json');
           Visio.UI.showToast("Proyecto guardado como .visio.json");
         },
 
@@ -3238,18 +3226,14 @@
           const svgEl = document.getElementById('visio-svg-canvas');
           const clone = svgEl.cloneNode(true);
 
-          // 1. Declarar atributos y espacios de nombres obligatorios para SVG estándar
           clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
           clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
           clone.setAttribute('version', '1.1');
 
-          // 2. Limpiar elementos interactivos y controles
           const overlay = clone.querySelector('#layer-overlay');
           if (overlay) overlay.remove();
-
           clone.querySelectorAll('.connection-port, .visio-connector-hitbox').forEach(el => el.remove());
 
-          // 3. Embeber estilos CSS para fuentes y trazos en visores vectoriales
           let defs = clone.querySelector('defs');
           if (!defs) {
             defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
@@ -3263,7 +3247,6 @@
           `;
           defs.appendChild(styleEl);
 
-          // 4. Calcular Bounding Box elegante con margen de 40px
           let viewBoxX = 0, viewBoxY = 0, viewBoxW = Visio.State.pageWidth, viewBoxH = Visio.State.pageHeight;
           if (Visio.State.shapes.length > 0) {
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -3293,8 +3276,8 @@
           }
 
           const svgString = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n' + new XMLSerializer().serializeToString(clone);
-          const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-          this.triggerDownload(blob, 'Diagrama1_Visio.svg');
+          const dataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+          this.triggerDownload(dataUrl, 'Diagrama1_Visio.svg');
           Visio.UI.showToast("Exportado como SVG vectorial");
         },
 
@@ -3366,13 +3349,10 @@
             ctx.fillRect(0, 0, viewBoxW, viewBoxH);
             ctx.drawImage(img, 0, 0, viewBoxW, viewBoxH);
 
-            canvas.toBlob((blob) => {
-              if (blob) {
-                Visio.IO.triggerDownload(blob, 'Diagrama1_Visio.png');
-                Visio.UI.showToast("Exportado como imagen PNG de alta resolución");
-              }
-              URLObj.revokeObjectURL(blobURL);
-            }, 'image/png');
+            const pngDataUrl = canvas.toDataURL('image/png');
+            Visio.IO.triggerDownload(pngDataUrl, 'Diagrama1_Visio.png');
+            Visio.UI.showToast("Exportado como imagen PNG de alta resolución");
+            URLObj.revokeObjectURL(blobURL);
           };
           img.src = blobURL;
         }
