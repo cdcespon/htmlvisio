@@ -1338,97 +1338,199 @@
       </div>
       <div class="stencil-accordion">
         
-        <!-- Categoría: Diagrama de Flujo Básico -->
+        <!-- Categoría 1: Diagrama de Flujo Extendido (BPMN / ISO) -->
         <div class="stencil-category">
           <div class="stencil-cat-header">
-            <span>Diagrama de Flujo Básico</span>
+            <span>Diagrama de Flujo</span>
             <span>▾</span>
           </div>
           <div class="stencil-grid">
-            <div class="stencil-item" draggable="true" data-shape="process">
-              <svg viewBox="0 0 60 40">
-                <rect x="5" y="5" width="50" height="30" rx="3" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="24" text-anchor="middle" font-size="9" fill="#242424">Proceso</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="process" title="Proceso">
+              <svg viewBox="0 0 60 40"><rect x="5" y="5" width="50" height="30" rx="2" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="24" text-anchor="middle" font-size="8" fill="#242424">Proceso</text></svg>
               <span>Proceso</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="decision">
-              <svg viewBox="0 0 60 40">
-                <polygon points="30,4 56,20 30,36 4,20" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Decisión</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="subprocess" title="Subproceso">
+              <svg viewBox="0 0 60 40"><rect x="5" y="5" width="50" height="30" rx="2" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><line x1="12" y1="5" x2="12" y2="35" stroke="#0f6cbd" stroke-width="1.5"/><line x1="48" y1="5" x2="48" y2="35" stroke="#0f6cbd" stroke-width="1.5"/><text x="30" y="24" text-anchor="middle" font-size="7.5" fill="#242424">Subproc.</text></svg>
+              <span>Subproceso</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="decision" title="Decisión">
+              <svg viewBox="0 0 60 40"><polygon points="30,4 56,20 30,36 4,20" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="7.5" fill="#242424">Decisión</text></svg>
               <span>Decisión</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="terminal">
-              <svg viewBox="0 0 60 40">
-                <rect x="5" y="8" width="50" height="24" rx="12" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Inicio/Fin</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="terminal" title="Inicio / Fin">
+              <svg viewBox="0 0 60 40"><rect x="5" y="8" width="50" height="24" rx="12" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Inicio/Fin</text></svg>
               <span>Inicio / Fin</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="document">
-              <svg viewBox="0 0 60 40">
-                <path d="M 5,5 L 55,5 L 55,30 Q 42,22 30,30 Q 18,38 5,30 Z" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="20" text-anchor="middle" font-size="8" fill="#242424">Documento</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="document" title="Documento">
+              <svg viewBox="0 0 60 40"><path d="M 5,5 L 55,5 L 55,28 Q 42,21 30,28 Q 18,35 5,28 Z" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="20" text-anchor="middle" font-size="7.5" fill="#242424">Doc.</text></svg>
               <span>Documento</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="data">
-              <svg viewBox="0 0 60 40">
-                <polygon points="12,6 56,6 48,34 4,34" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Datos (E/S)</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="multidocument" title="Documentos Múltiples">
+              <svg viewBox="0 0 60 40"><path d="M 12,2 L 56,2 L 56,22 Q 44,16 34,22 Q 24,28 12,22 Z" fill="#ebf3fc" stroke="#0f6cbd" stroke-width="1.5"/><path d="M 8,5 L 52,5 L 52,25 Q 40,19 30,25 Q 20,31 8,25 Z" fill="#ebf3fc" stroke="#0f6cbd" stroke-width="1.5"/><path d="M 4,8 L 48,8 L 48,28 Q 36,22 26,28 Q 16,34 4,28 Z" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="26" y="22" text-anchor="middle" font-size="7.5" fill="#242424">Docs</text></svg>
+              <span>Docs Múltiples</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="data" title="Datos (E/S)">
+              <svg viewBox="0 0 60 40"><polygon points="12,6 56,6 48,34 4,34" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Datos</text></svg>
               <span>Datos E/S</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="database">
-              <svg viewBox="0 0 60 40">
-                <ellipse cx="30" cy="10" rx="22" ry="6" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
-                <path d="M 8,10 L 8,30 C 8,34 52,34 52,30 L 52,10" fill="none" stroke="#0f6cbd" stroke-width="1.8"/>
-                <ellipse cx="30" cy="30" rx="22" ry="6" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
-                <text x="30" y="24" text-anchor="middle" font-size="8" fill="#242424">Base de Datos</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="database" title="Base de Datos">
+              <svg viewBox="0 0 60 40"><ellipse cx="30" cy="9" rx="20" ry="5" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><path d="M 10,9 L 10,29 C 10,34 50,34 50,29 L 50,9" fill="none" stroke="#0f6cbd" stroke-width="1.8"/><ellipse cx="30" cy="29" rx="20" ry="5" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" font-size="7.5" fill="#242424">BD</text></svg>
               <span>Base Datos</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="preparation" title="Preparación">
+              <svg viewBox="0 0 60 40"><polygon points="12,7 48,7 57,20 48,33 12,33 3,20" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" font-size="7.5" fill="#242424">Prep.</text></svg>
+              <span>Preparación</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="manual_op" title="Operación Manual">
+              <svg viewBox="0 0 60 40"><polygon points="4,7 56,7 46,33 14,33" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="22" text-anchor="middle" font-size="7.5" fill="#242424">Manual</text></svg>
+              <span>Operación Manual</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="delay" title="Retardo">
+              <svg viewBox="0 0 60 40"><path d="M 8,8 L 36,8 A 12 12 0 0 1 36,32 L 8,32 Z" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="24" y="23" text-anchor="middle" font-size="7.5" fill="#242424">D</text></svg>
+              <span>Retardo (D)</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="onpage_connector" title="Conector en Página">
+              <svg viewBox="0 0 60 40"><circle cx="30" cy="20" r="14" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="24" text-anchor="middle" font-size="9" font-weight="bold" fill="#0f6cbd">A</text></svg>
+              <span>Conector Hoja</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="offpage_connector" title="Conector fuera de Página">
+              <svg viewBox="0 0 60 40"><polygon points="10,6 50,6 50,22 30,34 10,22" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="20" text-anchor="middle" font-size="9" font-weight="bold" fill="#0f6cbd">1</text></svg>
+              <span>Fuera de Hoja</span>
             </div>
           </div>
         </div>
 
-        <!-- Categoría: Formas Generales y Bloques -->
+        <!-- Categoría 2: Formas Básicas y Geometría -->
         <div class="stencil-category">
           <div class="stencil-cat-header">
-            <span>Formas Generales</span>
+            <span>Formas Básicas</span>
             <span>▾</span>
           </div>
           <div class="stencil-grid">
-            <div class="stencil-item" draggable="true" data-shape="circle">
-              <svg viewBox="0 0 60 40">
-                <circle cx="30" cy="20" r="16" fill="#ffffff" stroke="#0f6cbd" stroke-width="2"/>
-                <text x="30" y="23" text-anchor="middle" font-size="9" fill="#242424">Círculo</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="round_rect" title="Rectángulo Redondeado">
+              <svg viewBox="0 0 60 40"><rect x="6" y="7" width="48" height="26" rx="8" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Redondo</text></svg>
+              <span>Rect. Redondo</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="circle" title="Círculo">
+              <svg viewBox="0 0 60 40"><circle cx="30" cy="20" r="15" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Círculo</text></svg>
               <span>Círculo</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="cloud">
-              <svg viewBox="0 0 60 40">
-                <path d="M 18,30 C 10,30 8,20 16,18 C 14,10 26,8 30,12 C 36,6 48,10 46,18 C 54,20 52,30 44,30 Z" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
-                <text x="30" y="24" text-anchor="middle" font-size="8" fill="#242424">Nube</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="triangle" title="Triángulo">
+              <svg viewBox="0 0 60 40"><polygon points="30,6 54,34 6,34" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="27" text-anchor="middle" font-size="8" fill="#242424">Triang.</text></svg>
+              <span>Triángulo</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="pentagon" title="Pentágono">
+              <svg viewBox="0 0 60 40"><polygon points="30,5 54,18 45,34 15,34 6,18" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="24" text-anchor="middle" font-size="7.5" fill="#242424">Pentágono</text></svg>
+              <span>Pentágono</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="hexagon" title="Hexágono">
+              <svg viewBox="0 0 60 40"><polygon points="16,6 44,6 55,20 44,34 16,34 5,20" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Hexág.</text></svg>
+              <span>Hexágono</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="octagon" title="Octágono">
+              <svg viewBox="0 0 60 40"><polygon points="18,5 42,5 53,16 53,24 42,35 18,35 7,24 7,16" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Octág.</text></svg>
+              <span>Octágono</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="trapezoid" title="Trapecio">
+              <svg viewBox="0 0 60 40"><polygon points="16,8 44,8 54,32 6,32" fill="#fff" stroke="#0f6cbd" stroke-width="2"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">Trapecio</text></svg>
+              <span>Trapecio</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="star5" title="Estrella">
+              <svg viewBox="0 0 60 40"><polygon points="30,4 35,16 48,16 38,24 42,36 30,28 18,36 22,24 12,16 25,16" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="24" text-anchor="middle" font-size="7.5" fill="#242424">★</text></svg>
+              <span>Estrella</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="cross" title="Cruz">
+              <svg viewBox="0 0 60 40"><polygon points="23,5 37,5 37,14 50,14 50,26 37,26 37,35 23,35 23,26 10,26 10,14 23,14" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="23" text-anchor="middle" font-size="8" fill="#242424">+</text></svg>
+              <span>Cruz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 3: Flechas de Bloque -->
+        <div class="stencil-category">
+          <div class="stencil-cat-header">
+            <span>Flechas de Bloque</span>
+            <span>▾</span>
+          </div>
+          <div class="stencil-grid">
+            <div class="stencil-item" draggable="true" data-shape="arrow_right" title="Flecha Derecha">
+              <svg viewBox="0 0 60 40"><polygon points="8,14 36,14 36,6 54,20 36,34 36,26 8,26" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Flecha Der.</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="arrow_left" title="Flecha Izquierda">
+              <svg viewBox="0 0 60 40"><polygon points="52,14 24,14 24,6 6,20 24,34 24,26 52,26" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Flecha Izq.</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="arrow_up" title="Flecha Arriba">
+              <svg viewBox="0 0 60 40"><polygon points="22,34 22,18 14,18 30,4 46,18 38,18 38,34" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Flecha Arriba</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="arrow_down" title="Flecha Abajo">
+              <svg viewBox="0 0 60 40"><polygon points="22,6 38,6 38,22 46,22 30,36 14,22 22,22" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Flecha Abajo</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="arrow_double" title="Flecha Doble">
+              <svg viewBox="0 0 60 40"><polygon points="18,7 5,20 18,33 18,25 42,25 42,33 55,20 42,7 42,15 18,15" fill="#fff" stroke="#0f6cbd" stroke-width="1.6"/></svg>
+              <span>Flecha Doble</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categoría 4: Redes y TI -->
+        <div class="stencil-category">
+          <div class="stencil-cat-header">
+            <span>Redes y Equipos TI</span>
+            <span>▾</span>
+          </div>
+          <div class="stencil-grid">
+            <div class="stencil-item" draggable="true" data-shape="server" title="Servidor Rack">
+              <svg viewBox="0 0 60 40"><rect x="10" y="6" width="40" height="28" rx="2" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><line x1="10" y1="15" x2="50" y2="15" stroke="#0f6cbd" stroke-width="1.2"/><line x1="10" y1="25" x2="50" y2="25" stroke="#0f6cbd" stroke-width="1.2"/><circle cx="16" cy="11" r="2" fill="#107c41"/><circle cx="16" cy="20" r="2" fill="#107c41"/><circle cx="16" cy="30" r="2" fill="#107c41"/></svg>
+              <span>Servidor</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="router" title="Router">
+              <svg viewBox="0 0 60 40"><ellipse cx="30" cy="20" rx="24" ry="12" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><path d="M 18,16 L 42,24 M 42,16 L 18,24" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Router</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="firewall" title="Firewall">
+              <svg viewBox="0 0 60 40"><rect x="8" y="7" width="44" height="26" rx="2" fill="#fff" stroke="#d83b01" stroke-width="1.8"/><line x1="8" y1="16" x2="52" y2="16" stroke="#d83b01" stroke-width="1.2"/><line x1="8" y1="24" x2="52" y2="24" stroke="#d83b01" stroke-width="1.2"/><line x1="22" y1="7" x2="22" y2="16" stroke="#d83b01" stroke-width="1.2"/><line x1="38" y1="7" x2="38" y2="16" stroke="#d83b01" stroke-width="1.2"/><line x1="30" y1="16" x2="30" y2="24" stroke="#d83b01" stroke-width="1.2"/><line x1="22" y1="24" x2="22" y2="33" stroke="#d83b01" stroke-width="1.2"/><line x1="38" y1="24" x2="38" y2="33" stroke="#d83b01" stroke-width="1.2"/></svg>
+              <span>Firewall</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="workstation" title="Estación de Trabajo">
+              <svg viewBox="0 0 60 40"><rect x="12" y="6" width="36" height="22" rx="2" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><line x1="30" y1="28" x2="30" y2="34" stroke="#0f6cbd" stroke-width="1.8"/><line x1="22" y1="34" x2="38" y2="34" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Estación PC</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="laptop" title="Portátil">
+              <svg viewBox="0 0 60 40"><rect x="16" y="8" width="28" height="20" rx="2" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><polygon points="8,32 52,32 46,28 14,28" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
+              <span>Laptop</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="cloud" title="Nube">
+              <svg viewBox="0 0 60 40"><path d="M 18,30 C 10,30 8,20 16,18 C 14,10 26,8 30,12 C 36,6 48,10 46,18 C 54,20 52,30 44,30 Z" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/></svg>
               <span>Nube</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="actor">
-              <svg viewBox="0 0 60 40">
-                <circle cx="30" cy="10" r="5" fill="#ffffff" stroke="#0f6cbd" stroke-width="1.8"/>
-                <line x1="30" y1="15" x2="30" y2="28" stroke="#0f6cbd" stroke-width="1.8"/>
-                <line x1="18" y1="20" x2="42" y2="20" stroke="#0f6cbd" stroke-width="1.8"/>
-                <line x1="30" y1="28" x2="20" y2="38" stroke="#0f6cbd" stroke-width="1.8"/>
-                <line x1="30" y1="28" x2="40" y2="38" stroke="#0f6cbd" stroke-width="1.8"/>
-              </svg>
+          </div>
+        </div>
+
+        <!-- Categoría 5: Llamadas y Anotaciones -->
+        <div class="stencil-category">
+          <div class="stencil-cat-header">
+            <span>Llamadas y Personas</span>
+            <span>▾</span>
+          </div>
+          <div class="stencil-grid">
+            <div class="stencil-item" draggable="true" data-shape="speech_balloon" title="Bocadillo de Diálogo">
+              <svg viewBox="0 0 60 40"><path d="M 10,6 L 50,6 Q 54,6 54,10 L 54,24 Q 54,28 50,28 L 26,28 L 14,35 L 18,28 L 10,28 Q 6,28 6,24 L 6,10 Q 6,6 10,6 Z" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="20" text-anchor="middle" font-size="8" fill="#242424">Diálogo</text></svg>
+              <span>Bocadillo</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="callout_rect" title="Llamada Rectangular">
+              <svg viewBox="0 0 60 40"><path d="M 6,5 L 54,5 L 54,26 L 36,26 L 24,35 L 28,26 L 6,26 Z" fill="#fff" stroke="#0f6cbd" stroke-width="1.8"/><text x="30" y="18" text-anchor="middle" font-size="8" fill="#242424">Llamada</text></svg>
+              <span>Llamada</span>
+            </div>
+            <div class="stencil-item" draggable="true" data-shape="actor" title="Actor">
+              <svg viewBox="0 0 60 40"><circle cx="30" cy="9" r="4.5" fill="#fff" stroke="#0f6cbd" stroke-width="1.6"/><line x1="30" y1="13.5" x2="30" y2="26" stroke="#0f6cbd" stroke-width="1.6"/><line x1="18" y1="18" x2="42" y2="18" stroke="#0f6cbd" stroke-width="1.6"/><line x1="30" y1="26" x2="20" y2="35" stroke="#0f6cbd" stroke-width="1.6"/><line x1="30" y1="26" x2="40" y2="35" stroke="#0f6cbd" stroke-width="1.6"/></svg>
               <span>Actor</span>
             </div>
-            <div class="stencil-item" draggable="true" data-shape="note">
-              <svg viewBox="0 0 60 40">
-                <path d="M 12,6 L 40,6 L 48,14 L 48,34 L 12,34 Z" fill="#fff8d6" stroke="#c9a834" stroke-width="1.8"/>
-                <polyline points="40,6 40,14 48,14" fill="none" stroke="#c9a834" stroke-width="1.8"/>
-                <text x="30" y="26" text-anchor="middle" font-size="8" fill="#444">Nota</text>
-              </svg>
+            <div class="stencil-item" draggable="true" data-shape="note" title="Nota Adhesiva">
+              <svg viewBox="0 0 60 40"><path d="M 12,6 L 40,6 L 48,14 L 48,34 L 12,34 Z" fill="#fff8d6" stroke="#c9a834" stroke-width="1.8"/><polyline points="40,6 40,14 48,14" fill="none" stroke="#c9a834" stroke-width="1.8"/><text x="30" y="26" text-anchor="middle" font-size="8" fill="#444">Nota</text></svg>
               <span>Nota</span>
             </div>
           </div>
@@ -1807,6 +1909,7 @@
       // Definiciones Vectoriales de las Formas de Visio
       Stencils: {
         definitions: {
+          // --- Categoría 1: Diagrama de Flujo ---
           process: {
             name: "Proceso",
             defaultW: 120,
@@ -1814,6 +1917,20 @@
             defaultText: "Proceso",
             render(shape) {
               return `<rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="3" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          subprocess: {
+            name: "Subproceso",
+            defaultW: 120,
+            defaultH: 70,
+            defaultText: "Subproceso",
+            render(shape) {
+              const m = 14;
+              return `
+                <rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="3" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>
+                <line x1="${m}" y1="0" x2="${m}" y2="${shape.h}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+                <line x1="${shape.w - m}" y1="0" x2="${shape.w - m}" y2="${shape.h}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+              `;
             }
           },
           decision: {
@@ -1847,6 +1964,22 @@
               return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
             }
           },
+          multidocument: {
+            name: "Documentos Múltiples",
+            defaultW: 120,
+            defaultH: 80,
+            defaultText: "Documentos",
+            render(shape) {
+              const w = shape.w - 12, h = shape.h - 12;
+              const waveY = h - 12;
+              const pathD = (ox, oy) => `M ${ox},${oy} L ${ox + w},${oy} L ${ox + w},${oy + waveY} Q ${ox + w * 0.75},${oy + h - 20} ${ox + w * 0.5},${oy + waveY} Q ${ox + w * 0.25},${oy + h} ${ox},${oy + waveY} Z`;
+              return `
+                <path d="${pathD(12, 0)}" fill="#ebf3fc" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="0.6"/>
+                <path d="${pathD(6, 6)}" fill="#f2f7fc" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="0.8"/>
+                <path class="shape-geom" d="${pathD(0, 12)}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>
+              `;
+            }
+          },
           data: {
             name: "Datos (E/S)",
             defaultW: 125,
@@ -1872,13 +2005,310 @@
               `;
             }
           },
+          preparation: {
+            name: "Preparación",
+            defaultW: 120,
+            defaultH: 60,
+            defaultText: "Preparación",
+            render(shape) {
+              const pts = `${shape.w*0.18},0 ${shape.w*0.82},0 ${shape.w},${shape.h/2} ${shape.w*0.82},${shape.h} ${shape.w*0.18},${shape.h} 0,${shape.h/2}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          manual_op: {
+            name: "Operación Manual",
+            defaultW: 120,
+            defaultH: 70,
+            defaultText: "Operación Manual",
+            render(shape) {
+              const pts = `0,0 ${shape.w},0 ${shape.w * 0.82},${shape.h} ${shape.w * 0.18},${shape.h}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          delay: {
+            name: "Retardo",
+            defaultW: 110,
+            defaultH: 70,
+            defaultText: "Retardo",
+            render(shape) {
+              const r = shape.h / 2;
+              const straightW = Math.max(0, shape.w - r);
+              const path = `M 0,0 L ${straightW},0 A ${r} ${r} 0 0 1 ${straightW},${shape.h} L 0,${shape.h} Z`;
+              return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          onpage_connector: {
+            name: "Conector en Página",
+            defaultW: 60,
+            defaultH: 60,
+            defaultText: "A",
+            render(shape) {
+              return `<ellipse class="shape-geom" cx="${shape.w/2}" cy="${shape.h/2}" rx="${shape.w/2}" ry="${shape.h/2}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          offpage_connector: {
+            name: "Conector fuera de Página",
+            defaultW: 80,
+            defaultH: 75,
+            defaultText: "1",
+            render(shape) {
+              const pts = `0,0 ${shape.w},0 ${shape.w},${shape.h * 0.65} ${shape.w / 2},${shape.h} 0,${shape.h * 0.65}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+
+          // --- Categoría 2: Formas Básicas ---
+          round_rect: {
+            name: "Rectángulo Redondeado",
+            defaultW: 120,
+            defaultH: 70,
+            defaultText: "Texto",
+            render(shape) {
+              return `<rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="12" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
           circle: {
             name: "Círculo",
             defaultW: 80,
             defaultH: 80,
-            defaultText: "Estado",
+            defaultText: "Círculo",
             render(shape) {
               return `<ellipse class="shape-geom" cx="${shape.w/2}" cy="${shape.h/2}" rx="${shape.w/2}" ry="${shape.h/2}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          triangle: {
+            name: "Triángulo",
+            defaultW: 100,
+            defaultH: 80,
+            defaultText: "Triángulo",
+            render(shape) {
+              const pts = `${shape.w / 2},0 ${shape.w},${shape.h} 0,${shape.h}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          pentagon: {
+            name: "Pentágono",
+            defaultW: 90,
+            defaultH: 85,
+            defaultText: "Pentágono",
+            render(shape) {
+              const pts = `${shape.w/2},0 ${shape.w},${shape.h * 0.38} ${shape.w * 0.81},${shape.h} ${shape.w * 0.19},${shape.h} 0,${shape.h * 0.38}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          hexagon: {
+            name: "Hexágono",
+            defaultW: 100,
+            defaultH: 80,
+            defaultText: "Hexágono",
+            render(shape) {
+              const pts = `${shape.w * 0.25},0 ${shape.w * 0.75},0 ${shape.w},${shape.h / 2} ${shape.w * 0.75},${shape.h} ${shape.w * 0.25},${shape.h} 0,${shape.h / 2}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          octagon: {
+            name: "Octágono",
+            defaultW: 90,
+            defaultH: 90,
+            defaultText: "Octágono",
+            render(shape) {
+              const pts = `${shape.w * 0.29},0 ${shape.w * 0.71},0 ${shape.w},${shape.h * 0.29} ${shape.w},${shape.h * 0.71} ${shape.w * 0.71},${shape.h} ${shape.w * 0.29},${shape.h} 0,${shape.h * 0.71} 0,${shape.h * 0.29}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          trapezoid: {
+            name: "Trapecio",
+            defaultW: 110,
+            defaultH: 70,
+            defaultText: "Trapecio",
+            render(shape) {
+              const pts = `${shape.w * 0.2},0 ${shape.w * 0.8},0 ${shape.w},${shape.h} 0,${shape.h}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          star5: {
+            name: "Estrella",
+            defaultW: 90,
+            defaultH: 90,
+            defaultText: "Estrella",
+            render(shape) {
+              const cx = shape.w / 2, cy = shape.h / 2;
+              const outerR = Math.min(shape.w, shape.h) / 2;
+              const innerR = outerR * 0.42;
+              let pts = [];
+              for (let i = 0; i < 10; i++) {
+                const r = i % 2 === 0 ? outerR : innerR;
+                const angle = (i * Math.PI / 5) - Math.PI / 2;
+                pts.push(`${(cx + r * Math.cos(angle)).toFixed(1)},${(cy + r * Math.sin(angle)).toFixed(1)}`);
+              }
+              return `<polygon class="shape-geom" points="${pts.join(' ')}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          cross: {
+            name: "Cruz",
+            defaultW: 80,
+            defaultH: 80,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const x1 = w * 0.32, x2 = w * 0.68;
+              const y1 = h * 0.32, y2 = h * 0.68;
+              const pts = `${x1},0 ${x2},0 ${x2},${y1} ${w},${y1} ${w},${y2} ${x2},${y2} ${x2},${h} ${x1},${h} ${x1},${y2} 0,${y2} 0,${y1} ${x1},${y1}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+
+          // --- Categoría 3: Flechas de Bloque ---
+          arrow_right: {
+            name: "Flecha Derecha",
+            defaultW: 120,
+            defaultH: 50,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const stemTop = h * 0.3, stemBottom = h * 0.7;
+              const headX = w * 0.65;
+              const pts = `0,${stemTop} ${headX},${stemTop} ${headX},0 ${w},${h/2} ${headX},${h} ${headX},${stemBottom} 0,${stemBottom}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          arrow_left: {
+            name: "Flecha Izquierda",
+            defaultW: 120,
+            defaultH: 50,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const stemTop = h * 0.3, stemBottom = h * 0.7;
+              const headX = w * 0.35;
+              const pts = `${w},${stemTop} ${headX},${stemTop} ${headX},0 0,${h/2} ${headX},${h} ${headX},${stemBottom} ${w},${stemBottom}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          arrow_up: {
+            name: "Flecha Arriba",
+            defaultW: 60,
+            defaultH: 100,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const stemLeft = w * 0.3, stemRight = w * 0.7;
+              const headY = h * 0.35;
+              const pts = `${stemLeft},${h} ${stemLeft},${headY} 0,${headY} ${w/2},0 ${w},${headY} ${stemRight},${headY} ${stemRight},${h}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          arrow_down: {
+            name: "Flecha Abajo",
+            defaultW: 60,
+            defaultH: 100,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const stemLeft = w * 0.3, stemRight = w * 0.7;
+              const headY = h * 0.65;
+              const pts = `${stemLeft},0 ${stemRight},0 ${stemRight},${headY} ${w},${headY} ${w/2},${h} 0,${headY} ${stemLeft},${headY}`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          arrow_double: {
+            name: "Flecha Doble",
+            defaultW: 130,
+            defaultH: 50,
+            defaultText: "",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const stemTop = h * 0.3, stemBottom = h * 0.7;
+              const headLeft = w * 0.25, headRight = w * 0.75;
+              const pts = `${headLeft},${stemTop} ${headRight},${stemTop} ${headRight},0 ${w},${h/2} ${headRight},${h} ${headRight},${stemBottom} ${headLeft},${stemBottom} ${headLeft},${h} 0,${h/2} ${headLeft},0`;
+              return `<polygon class="shape-geom" points="${pts}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+
+          // --- Categoría 4: Redes y TI ---
+          server: {
+            name: "Servidor Rack",
+            defaultW: 100,
+            defaultH: 80,
+            defaultText: "Servidor",
+            render(shape) {
+              const slotH = shape.h / 3;
+              return `
+                <rect class="shape-geom" x="0" y="0" width="${shape.w}" height="${shape.h}" rx="4" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <line x1="0" y1="${slotH}" x2="${shape.w}" y2="${slotH}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="0" y1="${slotH * 2}" x2="${shape.w}" y2="${slotH * 2}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <circle cx="14" cy="${slotH * 0.5}" r="3" fill="#107c41"/>
+                <circle cx="24" cy="${slotH * 0.5}" r="3" fill="#107c41"/>
+                <circle cx="14" cy="${slotH * 1.5}" r="3" fill="#107c41"/>
+                <circle cx="24" cy="${slotH * 1.5}" r="3" fill="#107c41"/>
+                <circle cx="14" cy="${slotH * 2.5}" r="3" fill="#107c41"/>
+                <circle cx="24" cy="${slotH * 2.5}" r="3" fill="#107c41"/>
+              `;
+            }
+          },
+          router: {
+            name: "Router",
+            defaultW: 90,
+            defaultH: 60,
+            defaultText: "Router",
+            render(shape) {
+              const cx = shape.w / 2, cy = shape.h / 2;
+              return `
+                <ellipse class="shape-geom" cx="${cx}" cy="${cy}" rx="${shape.w/2}" ry="${shape.h/2}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <path d="M ${cx - 20},${cy - 8} L ${cx + 20},${cy + 8} M ${cx + 20},${cy - 8} L ${cx - 20},${cy + 8}" stroke="${shape.stroke}" stroke-width="${Math.max(2, shape.strokeWidth)}"/>
+              `;
+            }
+          },
+          firewall: {
+            name: "Firewall",
+            defaultW: 90,
+            defaultH: 70,
+            defaultText: "Firewall",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const rowH = h / 3;
+              return `
+                <rect class="shape-geom" x="0" y="0" width="${w}" height="${h}" rx="3" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <line x1="0" y1="${rowH}" x2="${w}" y2="${rowH}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="0" y1="${rowH * 2}" x2="${w}" y2="${rowH * 2}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="${w * 0.33}" y1="0" x2="${w * 0.33}" y2="${rowH}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="${w * 0.67}" y1="0" x2="${w * 0.67}" y2="${rowH}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="${w * 0.5}" y1="${rowH}" x2="${w * 0.5}" y2="${rowH * 2}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="${w * 0.25}" y1="${rowH * 2}" x2="${w * 0.25}" y2="${h}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+                <line x1="${w * 0.75}" y1="${rowH * 2}" x2="${w * 0.75}" y2="${h}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.75}"/>
+              `;
+            }
+          },
+          workstation: {
+            name: "Estación de Trabajo",
+            defaultW: 90,
+            defaultH: 75,
+            defaultText: "PC",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const screenH = h * 0.68;
+              return `
+                <rect class="shape-geom" x="0" y="0" width="${w}" height="${screenH}" rx="4" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <rect x="4" y="4" width="${w - 8}" height="${screenH - 8}" rx="2" fill="none" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 0.6}" opacity="0.5"/>
+                <line x1="${w/2}" y1="${screenH}" x2="${w/2}" y2="${h - 4}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 1.5}"/>
+                <line x1="${w * 0.3}" y1="${h - 4}" x2="${w * 0.7}" y2="${h - 4}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth * 2}" stroke-linecap="round"/>
+              `;
+            }
+          },
+          laptop: {
+            name: "Laptop",
+            defaultW: 90,
+            defaultH: 65,
+            defaultText: "Laptop",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const screenW = w * 0.74;
+              const screenH = h * 0.65;
+              const screenX = (w - screenW) / 2;
+              return `
+                <rect class="shape-geom" x="${screenX}" y="0" width="${screenW}" height="${screenH}" rx="3" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" opacity="${shape.opacity}"/>
+                <polygon points="0,${h} ${w},${h} ${screenX + screenW + 6},${screenH + 2} ${screenX - 6},${screenH + 2}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}"/>
+              `;
             }
           },
           cloud: {
@@ -1889,6 +2319,32 @@
             render(shape) {
               const w = shape.w, h = shape.h;
               const path = `M ${w*0.25},${h*0.75} C ${w*0.05},${h*0.75} 0,${h*0.45} ${w*0.2},${h*0.4} C ${w*0.15},${h*0.15} ${w*0.45},${h*0.1} ${w*0.5},${h*0.25} C ${w*0.65},${h*0.05} ${w*0.85},${h*0.15} ${w*0.85},${h*0.4} C ${w*1.02},${h*0.45} ${w*1.02},${h*0.75} ${w*0.8},${h*0.75} Z`;
+              return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+
+          // --- Categoría 5: Llamadas y Personas ---
+          speech_balloon: {
+            name: "Bocadillo",
+            defaultW: 120,
+            defaultH: 80,
+            defaultText: "Comentario",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const bodyH = h - 14;
+              const path = `M 12,0 L ${w - 12},0 Q ${w},0 ${w},12 L ${w},${bodyH - 12} Q ${w},${bodyH} ${w - 12},${bodyH} L 45,${bodyH} L 25,${h} L 32,${bodyH} L 12,${bodyH} Q 0,${bodyH} 0,${bodyH - 12} L 0,12 Q 0,0 12,0 Z`;
+              return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
+            }
+          },
+          callout_rect: {
+            name: "Llamada",
+            defaultW: 120,
+            defaultH: 75,
+            defaultText: "Anotación",
+            render(shape) {
+              const w = shape.w, h = shape.h;
+              const bodyH = h - 14;
+              const path = `M 0,0 L ${w},0 L ${w},${bodyH} L 45,${bodyH} L 20,${h} L 28,${bodyH} L 0,${bodyH} Z`;
               return `<path class="shape-geom" d="${path}" fill="${shape.fill}" stroke="${shape.stroke}" stroke-width="${shape.strokeWidth}" stroke-dasharray="${Visio.Renderer.getDashArray(shape.strokeDash)}" opacity="${shape.opacity}"/>`;
             }
           },
@@ -2004,7 +2460,10 @@
             // Texto In-situ centrado
             let textY = shape.h / 2;
             if (shape.type === 'database') textY += 6;
-            if (shape.type === 'document') textY -= 4;
+            if (shape.type === 'document' || shape.type === 'multidocument') textY -= 4;
+            if (shape.type === 'triangle') textY += 8;
+            if (shape.type === 'offpage_connector') textY -= 4;
+            if (shape.type === 'speech_balloon' || shape.type === 'callout_rect') textY -= 6;
 
             const fontWeight = shape.isBold ? 'bold' : 'normal';
             const fontStyle = shape.isItalic ? 'italic' : 'normal';
@@ -3149,11 +3608,47 @@
             });
           });
 
+          // Acordeón de Categorías colapsable
+          document.querySelectorAll('.stencil-cat-header').forEach(header => {
+            header.addEventListener('click', () => {
+              const grid = header.nextElementSibling;
+              const arrow = header.querySelector('span:last-child');
+              if (!grid) return;
+              if (grid.style.display === 'none') {
+                grid.style.display = 'grid';
+                if (arrow) arrow.textContent = '▾';
+              } else {
+                grid.style.display = 'none';
+                if (arrow) arrow.textContent = '▸';
+              }
+            });
+          });
+
+          // Búsqueda en tiempo real con apertura automática de categorías coincidentes
           document.getElementById('stencil-search-input').addEventListener('input', (e) => {
-            const q = e.target.value.toLowerCase();
-            document.querySelectorAll('.stencil-item').forEach(item => {
-              const text = item.innerText.toLowerCase();
-              item.style.display = text.includes(q) ? 'flex' : 'none';
+            const q = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.stencil-category').forEach(cat => {
+              const catItems = cat.querySelectorAll('.stencil-item');
+              const grid = cat.querySelector('.stencil-grid');
+              const arrow = cat.querySelector('.stencil-cat-header span:last-child');
+              let hasMatch = false;
+
+              catItems.forEach(item => {
+                const text = (item.innerText + ' ' + (item.getAttribute('title') || '') + ' ' + (item.getAttribute('data-shape') || '')).toLowerCase();
+                const match = !q || text.includes(q);
+                item.style.display = match ? 'flex' : 'none';
+                if (match) hasMatch = true;
+              });
+
+              if (q) {
+                cat.style.display = hasMatch ? 'block' : 'none';
+                if (grid && hasMatch) {
+                  grid.style.display = 'grid';
+                  if (arrow) arrow.textContent = '▾';
+                }
+              } else {
+                cat.style.display = 'block';
+              }
             });
           });
         },

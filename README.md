@@ -18,21 +18,28 @@ Interfaz idéntica a Microsoft Visio con cinta de opciones Ribbon, paleta de ste
 
 ---
 
-### 2. Selección, Transformación con 8 Manijas y Panel de Formato
+### 2. Catálogo Extendido de Formas (Stencils) y Acordeón Clasificado
+Más de 35 formas vectoriales clasificadas en 5 categorías colapsables con buscador en tiempo real:
+
+![Catálogo Extendido de Stencils](assets/images/visio_stencils_expanded.png)
+
+---
+
+### 3. Selección, Transformación con 8 Manijas y Panel de Formato
 Marco de selección interactivo con 8 manijas de redimensionamiento ortogonal/diagonal, nodo de rotación angular superior y sincronización bidireccional en el panel derecho:
 
 ![Transformación e Inspector](assets/images/shape_selection.png)
 
 ---
 
-### 3. Pestañas de la Cinta de Opciones (Ribbon de Visio)
+### 4. Pestañas de la Cinta de Opciones (Ribbon de Visio)
 Navegación reactiva entre pestañas (*Archivo, Inicio, Insertar, Diseño, Vista, Ayuda*):
 
 ![Cinta Ribbon de Visio](assets/images/insertar_ribbon.png)
 
 ---
 
-### 4. Menú Archivo, Plantillas de Ejemplo y Exportación
+### 5. Menú Archivo, Plantillas de Ejemplo y Exportación
 Guardado y carga en formato nativo `.visio.json`, plantillas precargadas con un clic y exportación a gráfico vectorial `.SVG` o imagen `.PNG` a resolución 2x:
 
 ![Menú Archivo y Exportación](assets/images/archivo_modal.png)
@@ -53,10 +60,14 @@ Guardado y carga en formato nativo `.visio.json`, plantillas precargadas con un 
   - Zoom de 25% a 250% mediante rueda del ratón (`Ctrl + Scroll`), deslizador o botones.
   - Reglas métricas horizontales y verticales graduadas y sincronizadas.
   - Cuadrícula milimétrica con soporte magnético (*Snap to Grid*).
-- **Biblioteca Vectorial de Stencils:**
-  - *Diagrama de flujo:* Proceso, Decisión, Inicio/Fin (Terminal), Documento, Datos (E/S), Base de Datos.
-  - *Formas generales y anotaciones:* Círculo, Nube, Actor (UML/Casos de uso), Nota adhesiva.
-  - Soporte para **arrastrar y soltar (Drag & Drop)** hacia el lienzo o añadir mediante un clic.
+- **Biblioteca Vectorial de Formas (35+ Stencils en 5 Categorías):**
+  - **Diagrama de Flujo:** Proceso, Subproceso, Decisión, Inicio/Fin, Documento, Documentos Múltiples, Datos (E/S), Base de Datos, Preparación, Operación Manual, Retardo, Conector en Página, Conector Fuera de Página.
+  - **Formas Básicas:** Rectángulo Redondeado, Círculo, Triángulo, Pentágono, Hexágono, Octágono, Trapecio, Estrella de 5 Puntas, Cruz.
+  - **Flechas de Bloque:** Flecha Derecha, Flecha Izquierda, Flecha Arriba, Flecha Abajo, Flecha Doble.
+  - **Redes y Equipos TI:** Servidor Rack (con LEDs y slots), Router, Firewall, Estación de Trabajo PC, Laptop, Nube / Red Externa.
+  - **Llamadas y Personas:** Bocadillo de Diálogo, Llamada Rectangular, Actor (UML / Usuario), Nota Adhesiva.
+  - **Buscador y Acordeón Reactivo:** Búsqueda en vivo de formas con expansión automática de categorías y colapso/despliegue manual.
+  - Soporte completo para **arrastrar y soltar (Drag & Drop)** hacia el lienzo o añadir mediante un clic.
 - **Conectores Inteligentes Ortogonales (Algoritmo Manhattan):**
   - Puertos de anclaje magnéticos (Norte, Sur, Este, Oeste).
   - Ruteo ortogonal automático a 90° estilo Visio, o modos de línea recta y curva Bézier.
